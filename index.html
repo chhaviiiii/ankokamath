@@ -6,7 +6,7 @@
 <title>Ankho Ka Math — Private Vedic Kundli & Numerology</title>
 <meta name="description" content="Private Vedic kundli, numerology, match-making and Lal Kitab — calculated in your browser, nothing sent away.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Sora:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#070b1a;--ink2:#0d1430;--panel:rgba(16,24,52,.72);--line:rgba(160,190,220,.16);--teal:#5fd1c4;--gold:#d4b06a;--text:#e8ecf5;--mute:#9aa6c2;--red:#ff7b7b}
 *{box-sizing:border-box}
@@ -16,15 +16,20 @@ body{margin:0;background:var(--ink);color:var(--text);font:400 16px/1.6 Sora,sys
 .wrap{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:0 16px}
 header.top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;max-width:1040px;margin:0 auto;padding:16px}
 .logo{font:600 26px 'Cormorant Garamond',serif;color:var(--gold);letter-spacing:.02em;text-decoration:none}
-nav a{color:var(--mute);text-decoration:none;margin-left:20px;font-size:14px}
+nav a{white-space:nowrap;color:var(--mute);text-decoration:none;margin-left:20px;font-size:14px}
 nav a:hover{color:var(--teal)}
 .hero{text-align:center;min-height:calc(100vh - 80px);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 0 64px}
-.eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--teal);opacity:.9;margin-bottom:22px;display:flex;align-items:center;gap:14px}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);opacity:.9;margin-bottom:22px;display:flex;align-items:center;gap:14px}
 .eyebrow:before,.eyebrow:after{content:"";width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--teal))}
 .eyebrow:after{transform:scaleX(-1)}
 .hero h1{font:600 clamp(54px,12vw,120px)/.95 'Cormorant Garamond',serif;margin:0;color:var(--text);letter-spacing:.01em;text-shadow:0 0 60px rgba(95,209,196,.25)}
 .hero h1 span{display:block;background:linear-gradient(100deg,#b8923f,#f1d99a 50%,#c9a45a);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
-.hindi{color:var(--teal);letter-spacing:.35em;font-size:15px;margin-top:18px}
+.hero{position:relative;overflow:visible}
+.wheel{position:absolute;left:50%;top:46%;width:min(760px,150vw);aspect-ratio:1;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;opacity:.55;-webkit-mask-image:radial-gradient(circle,#000 45%,transparent 72%);mask-image:radial-gradient(circle,#000 45%,transparent 72%)}
+.wheel svg{width:100%;height:100%;animation:spin 320s linear infinite}
+.wheel .glow{position:absolute;inset:22%;border-radius:50%;background:radial-gradient(circle,rgba(95,209,196,.16),transparent 68%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hindi{font:400 clamp(26px,5vw,38px)/1.2 'Tiro Devanagari Hindi','Noto Serif Devanagari',serif;letter-spacing:0;color:var(--teal);margin-top:16px}
 .orn{display:flex;align-items:center;gap:12px;margin:26px 0 22px;color:var(--gold)}
 .orn i{width:90px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}.orn i:last-child{transform:scaleX(-1)}
 .slogan{font:italic 500 clamp(21px,3.4vw,30px)/1.45 'Cormorant Garamond',serif;color:#dfe6f7;max-width:680px;margin:0 auto 36px}
@@ -33,10 +38,11 @@ nav a:hover{color:var(--teal)}
 .btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
 .btn.ghost{background:transparent;color:var(--teal);border:1px solid var(--teal);padding:10px 20px;font-size:14px;min-height:40px;box-shadow:none}
 .modes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:44px}
-.modes a{color:var(--mute);text-decoration:none;font-size:13px;border:1px solid var(--line);border-radius:999px;padding:9px 16px;background:rgba(10,16,40,.45);backdrop-filter:blur(6px);transition:.2s}
+.modes a{color:#cfd8ee;text-decoration:none;font-size:13px;border:1px solid var(--line);border-radius:999px;padding:9px 16px;background:rgba(10,16,40,.45);backdrop-filter:blur(6px);transition:.2s}
 .modes a:hover{color:var(--gold);border-color:var(--gold)}
 .hero>*{animation:rise .9s both}.hero>*:nth-child(2){animation-delay:.08s}.hero>*:nth-child(3){animation-delay:.16s}.hero>*:nth-child(4){animation-delay:.24s}.hero>*:nth-child(5){animation-delay:.34s}.hero>*:nth-child(6){animation-delay:.46s}.hero>*:nth-child(7){animation-delay:.58s}
-@media(max-width:560px){.eyebrow{letter-spacing:.2em;font-size:11px}.eyebrow:before,.eyebrow:after{display:none}}
+@media(max-width:560px){.logo{font-size:22px;white-space:nowrap}.wheel{opacity:.7}.eyebrow{letter-spacing:.12em;font-size:11px}.eyebrow:before,.eyebrow:after{display:none}}
+section.hero>.wheel{animation:none}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .scroll{margin-top:40px;color:var(--mute);font-size:20px;text-decoration:none;animation:bob 2.4s ease-in-out infinite!important}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
@@ -145,6 +151,7 @@ footer a{color:var(--teal)}
 
 <main class="wrap" id="top">
   <section class="hero">
+    <div class="wheel" aria-hidden="true"><div class="glow"></div><svg id="wheelSvg" viewBox="-300 -300 600 600"></svg></div>
     <div class="eyebrow">Vedic astrology · Numerology</div>
     <h1>Ankho Ka <span>Math</span></h1>
     <div class="hindi">अंकों का मैथ</div>
@@ -1047,6 +1054,16 @@ wireForm('#matchNForm','#matchNErr','#matchNResults',()=>{
 wireForm('#lalForm','#lalErr','#lalResults',()=>lalReport(readBirth('l')));
 
 document.querySelectorAll('.modes a').forEach(a=>a.addEventListener('click',()=>{const t=document.querySelector('.tab[data-t="'+a.dataset.t+'"]');if(t)t.click()}));
+(function(){
+  const g=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'].map(x=>x+'\uFE0E');
+  let h='<g fill="none" stroke="#d4b06a" stroke-width="1"><circle r="290" opacity=".5"/><circle r="236" opacity=".35"/><circle r="180" opacity=".25" stroke="#5fd1c4"/><circle r="120" opacity=".18" stroke="#5fd1c4"/></g><g stroke="#d4b06a" stroke-width="1" opacity=".45">';
+  for(let i=0;i<72;i++){const a=i*5*Math.PI/180,r1=i%6?276:268;h+=`<line x1="${Math.cos(a)*290}" y1="${Math.sin(a)*290}" x2="${Math.cos(a)*r1}" y2="${Math.sin(a)*r1}"/>`}
+  h+='</g><g stroke="#d4b06a" opacity=".3">';
+  for(let i=0;i<12;i++){const a=i*30*Math.PI/180;h+=`<line x1="${Math.cos(a)*236}" y1="${Math.sin(a)*236}" x2="${Math.cos(a)*266}" y2="${Math.sin(a)*266}"/>`}
+  h+='</g><g fill="#e8cf94" font-size="22" text-anchor="middle" dominant-baseline="central" opacity=".9">';
+  g.forEach((x,i)=>{const a=(i*30+15-90)*Math.PI/180;h+=`<text x="${Math.cos(a)*251}" y="${Math.sin(a)*251}" transform="rotate(${i*30+15} ${Math.cos(a)*251} ${Math.sin(a)*251})">${x}</text>`});
+  $('#wheelSvg').innerHTML=h+'</g>';
+})();
 /* tabs */
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===t));
