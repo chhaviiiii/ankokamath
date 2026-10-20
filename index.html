@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ankho Ka Math — Private Vedic Kundli & Numerology</title>
-<meta name="description" content="Private Vedic kundli, numerology, match-making and Lal Kitab — calculated in your browser, nothing sent away.">
+<title>Ankho Ka Math: Private Vedic Kundli & Numerology</title>
+<meta name="description" content="Private Vedic kundli, numerology, match-making and Lal Kitab, calculated in your browser, nothing sent away.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Sora:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
 <style>
@@ -219,7 +219,7 @@ footer a{color:var(--teal)}
 </main>
 
 <footer>
-  <p>Ankho Ka Math offers guidance for reflection — not professional, medical, legal or financial advice, and not a prediction of fate. Calculations are approximate (Lahiri sidereal, simplified ephemeris) and made entirely on your device; nothing is stored or sent anywhere.</p>
+  <p>Ankho Ka Math offers guidance for reflection, not professional, medical, legal or financial advice, and not a prediction of fate. Calculations are approximate (Lahiri sidereal, simplified ephemeris) and made entirely on your device; nothing is stored or sent anywhere.</p>
   <p>Made by <a href="https://vivieknayyar.com" target="_blank" rel="noopener">Viviek Nayyar</a> · ankokamath.com</p>
 </footer>
 
@@ -601,7 +601,7 @@ function fore(ch,now,name){
   const nm=ch.planets.Moon.sign, t=tropical(now.jd-2451543.5), ay=ayanamsa(now.jd);
   const h=n=>((Math.floor(norm(t[n]-ay)/30)-nm+12)%12)+1;
   const line=(n)=>{const hh=h(n), g=GOOD[n].includes(hh);
-    return`<li><b>${n}</b> moves through your ${ord(hh)} house from the Moon (${esc(THEME[hh])}) — <span class="${g?'good':'mid'}">${g?'a supportive influence':'ask for patience and steadiness'}</span>.</li>`};
+    return`<li><b>${n}</b> moves through your ${ord(hh)} house from the Moon (${esc(THEME[hh])}): <span class="${g?'good':'mid'}">${g?'a supportive influence':'ask for patience and steadiness'}</span>.</li>`};
   return`<h4>Daily feel</h4><ul class="clean">${line('Moon')}</ul>
   <h4>Weekly feel</h4><ul class="clean">${line('Mars')}</ul>
   <h4>Monthly feel</h4><ul class="clean">${line('Sun')}</ul>
@@ -615,7 +615,7 @@ const REM={
  Mercury:'Read, write or learn something every day, keep speech gentle and feed a cow green fodder. Wednesdays suit study and clear communication.',
  Jupiter:'Respect teachers and mentors, share knowledge, and offer yellow foods such as chana dal. Thursdays suit gratitude and learning.',
  Venus:'Keep your home tidy and beautiful, respect the women in your life and share something sweet. Fridays suit art, love and harmony.',
- Saturn:'Serve those who work hard — helpers, labourers, the elderly — and keep promises. Saturdays suit patience and simple routine.',
+ Saturn:'Serve those who work hard, helpers, labourers, the elderly, and keep promises. Saturdays suit patience and simple routine.',
  Rahu:'Reduce clutter and screen-time, stay grounded in routine, and offer a handful of barley or a coconut to flowing water with a quiet wish.',
  Ketu:'Feed a stray dog, spend a little time in silence or meditation, and let go of one thing you no longer need.'
 };
@@ -623,7 +623,7 @@ function remedies(ch){
   const weak=PL.filter(n=>n!=='Rahu'&&n!=='Ketu'&&(DEBIL[n]===ch.planets[n].sign||[6,8,12].includes(ch.planets[n].house))||(n==='Rahu'||n==='Ketu')&&[1,5,7,8].includes(ch.planets[n].house));
   let h='';
   if(weak.length){h+='<p>These planets are worth a little extra care in your chart (debilitated, or in the 6th/8th/12th house). Gentle habits, not gemstones, are suggested:</p><ul class="clean">';
-    weak.forEach(n=>{h+=`<li><b>${n}</b> — ${REM[n]}</li>`});h+='</ul>'}
+    weak.forEach(n=>{h+=`<li><b>${n}</b>: ${REM[n]}</li>`});h+='</ul>'}
   const lord=SLORD[ch.lagna];
   h+=`<p>For overall balance, honour your Lagna lord <b>${lord}</b>: ${REM[lord]}</p>`;
   return h;
@@ -641,7 +641,7 @@ function birthBlock(p,o){
   <div class="hint" id="${p}UnkNote" hidden>We'll use 12:00 noon. Your Lagna (rising sign) and house placements may be approximate.</div></div>`;
   if(place) h+=`<div class="f"><label for="${p}Country">Country</label><div class="cb"><input type="text" id="${p}Country" autocomplete="off" role="combobox" aria-autocomplete="list" placeholder="Search countries…"></div></div>
   <div class="f"><label for="${p}City">City / town</label><div class="cb"><input type="text" id="${p}City" autocomplete="off" role="combobox" aria-autocomplete="list" placeholder="Search your city…"></div>
-  <div class="hint">Pick country, then city — coordinates and timezone fill automatically. If your town isn't listed, choose the nearest city or enter coordinates under Advanced.</div><div class="hint good" id="${p}LocNote"></div></div>
+  <div class="hint">Pick country, then city, coordinates and timezone fill automatically. If your town isn't listed, choose the nearest city or enter coordinates under Advanced.</div><div class="hint good" id="${p}LocNote"></div></div>
   <details class="adv" id="${p}Adv"><summary>Advanced: coordinates &amp; time zone</summary><div class="row3">
   <div class="f"><label for="${p}Lat">Latitude</label><input type="text" id="${p}Lat" inputmode="decimal" placeholder="28.6139"></div>
   <div class="f"><label for="${p}Lon">Longitude</label><input type="text" id="${p}Lon" inputmode="decimal" placeholder="77.2090"></div>
@@ -743,7 +743,7 @@ function wireLocation(p){
     const v=city.value.trim().toLowerCase();
     const hit=st.country.cities.find(x=>x.name.toLowerCase()===v);
     if(hit){st.city=hit;lat.value=hit.lat;lon.value=hit.lon;tz.value=hit.tz;note.className='hint good';note.textContent=`✓ ${hit.name}: ${hit.lat}, ${hit.lon} · ${hit.tz}`}
-    else if(v){ if(st.city){lat.value=lon.value=''} st.city=null; adv.open=true; note.className='hint mid'; note.textContent='Not in our list — enter latitude and longitude under Advanced (a quick map search will give them).'}
+    else if(v){ if(st.city){lat.value=lon.value=''} st.city=null; adv.open=true; note.className='hint mid'; note.textContent='Not in our list, enter latitude and longitude under Advanced (a quick map search will give them).'}
     else {st.city=null; note.textContent=''}
   }
   makeCombo(c,(q)=>{
@@ -756,8 +756,8 @@ function wireLocation(p){
   makeCombo(city,(q,raw)=>{
     if(!st.country) return [{info:1,label:'Choose a country first'}];
     let list=st.country.cities.filter(x=>!q||fold(x.name).includes(q)).sort((x,y)=>(fold(y.name).startsWith(q)-fold(x.name).startsWith(q))||0).slice(0,80).map(x=>({v:x.name,label:x.name,sub:x.lat.toFixed(2)+', '+x.lon.toFixed(2)}));
-    if(raw&&!st.country.cities.some(x=>fold(x.name)===fold(raw))) list.push({v:raw,custom:1,label:'Use “'+raw+'” — add coordinates under Advanced'});
-    return list.length?list:[{info:1,label:'No cities listed — type yours and add coordinates under Advanced'}];
+    if(raw&&!st.country.cities.some(x=>fold(x.name)===fold(raw))) list.push({v:raw,custom:1,label:'Use “'+raw+'”, add coordinates under Advanced'});
+    return list.length?list:[{info:1,label:'No cities listed, type yours and add coordinates under Advanced'}];
   });
   c.addEventListener('input',fillCountry);
   c.addEventListener('change',()=>{fillCountry();if(st.country)c.value=st.country.name});
@@ -849,8 +849,8 @@ function astroReport(b){
   <tr><td><b>Total</b></td>${av.sav.map(v=>`<td class="${v>=28?'good':'mid'}"><b>${v}</b></td>`).join('')}<td><b>${av.sav.reduce((a,c)=>a+c,0)}</b></td></tr></table></div>
   <p class="hint">Your Lagna sign (${SIGNS[ch.lagna]}) holds ${av.sav[ch.lagna]} points; your Moon sign holds ${av.sav[mo.sign]}.</p></div>
   <div class="card"><h3>Period forecasts</h3>${fore(ch,now,b.name)}</div>
-  <div class="card"><h3>Remedies</h3>${remedies(ch)}<p class="note">Remedies are simple habits for reflection and calm — nothing needs to be bought.</p></div>
-  <p class="note">Guidance for reflection only — not a prediction of fate and not medical, legal or financial advice.</p>`;
+  <div class="card"><h3>Remedies</h3>${remedies(ch)}<p class="note">Remedies are simple habits for reflection and calm, nothing needs to be bought.</p></div>
+  <p class="note">Guidance for reflection only, not a prediction of fate and not medical, legal or financial advice.</p>`;
   return h;
 }
 
@@ -895,16 +895,16 @@ function numReport(b,gender){
   <h4>How it was worked out</h4><ul class="clean">
   <li>Driver = birth day ${b.d}${b.d>9?' → '+(b.d+'').split('').join(' + ')+' = '+(b.d+'').split('').reduce((a,c)=>a+ +c,0):''} → <b>${driver}</b></li>
   <li>Conductor = all digits of ${b.d}/${b.m}/${b.y}: ${digs.join(' + ')} = ${digs.reduce((a,c)=>a+c,0)} → <b>${conductor}</b></li></ul>
-  <p><b>Driver ${driver}</b> (${NPLANET[driver]}) is how you naturally behave — themes of ${NM[driver]}. <b>Conductor ${conductor}</b> (${NPLANET[conductor]}) describes the path life tends to lead you along — themes of ${NM[conductor]}. ${rel(driver,conductor).t==='Challenging'?'These two numbers pull in different directions, so balance is a lifelong theme.':rel(driver,conductor).t==='Same'?'Your two numbers match, which can feel like a very focused life path.':'Your two numbers work together reasonably well.'}</p></div>
+  <p><b>Driver ${driver}</b> (${NPLANET[driver]}) is how you naturally behave, themes of ${NM[driver]}. <b>Conductor ${conductor}</b> (${NPLANET[conductor]}) describes the path life tends to lead you along, themes of ${NM[conductor]}. ${rel(driver,conductor).t==='Challenging'?'These two numbers pull in different directions, so balance is a lifelong theme.':rel(driver,conductor).t==='Same'?'Your two numbers match, which can feel like a very focused life path.':'Your two numbers work together reasonably well.'}</p></div>
   <div class="card"><h3>Lo Shu grid</h3><div class="lo">${grid.flat().map(n=>`<div class="${cnt[n]?'':'miss'}">${cnt[n]?String(n).repeat(cnt[n]):n}</div>`).join('')}</div>
   <p class="hint">Digits of your birth date plus Driver and Conductor. Faded boxes are missing numbers.</p>
-  <h4>Missing numbers</h4>${missing.length?`<ul class="clean">${missing.map(n=>`<li><b>${n}</b> (${NPLANET[n]}) — ${MR[n]}</li>`).join('')}</ul>`:'<p>No numbers are missing — a well-rounded grid.</p>'}
-  ${Object.keys(cnt).filter(n=>cnt[n]>=3).length?`<p class="note">Repeated three or more times: ${Object.keys(cnt).filter(n=>cnt[n]>=3).map(n=>`${n}×${cnt[n]}`).join(', ')} — that quality can come on strong; balance it with its opposite.</p>`:''}</div>
+  <h4>Missing numbers</h4>${missing.length?`<ul class="clean">${missing.map(n=>`<li><b>${n}</b> (${NPLANET[n]}): ${MR[n]}</li>`).join('')}</ul>`:'<p>No numbers are missing, a well-rounded grid.</p>'}
+  ${Object.keys(cnt).filter(n=>cnt[n]>=3).length?`<p class="note">Repeated three or more times: ${Object.keys(cnt).filter(n=>cnt[n]>=3).map(n=>`${n}×${cnt[n]}`).join(', ')}, that quality can come on strong; balance it with its opposite.</p>`:''}</div>
   <div class="card"><h3>Kua number &amp; lucky directions</h3><p>Kua <b>${k}</b> (${gender==='m'?'male':'female'}, ${[1,3,4,9].includes(k)?'East':'West'} group).</p>
   <ul class="clean">${grp.dirs.map(x=>`<li class="good">${x}</li>`).join('')}</ul><p class="hint">Directions to be careful with: ${grp.bad}. Use them gently when choosing where to sit, sleep or work.</p></div>`;
   if(nv.num) h+=`<div class="card"><h3>Name check · Chaldean</h3><p>“${esc(b.name)}” → ${nv.letters} letters, total <b>${nv.sum}</b> → <b>${nv.num}</b> (${NPLANET[nv.num]}).</p>
   <p>Against your Driver ${driver}: <b>${nr.t}</b>. Against your Conductor ${conductor}: <b>${nc.t}</b>.</p>
-  <p class="note">${nr.s+nc.s>=2.5?'Your name vibrates in harmony with your birth numbers. Nothing needs changing.':'If you ever wish, a small spelling variation that gives a total friendlier to your Driver and Conductor is traditionally suggested. This is entirely optional — your name is your own.'}</p></div>`;
+  <p class="note">${nr.s+nc.s>=2.5?'Your name vibrates in harmony with your birth numbers. Nothing needs changing.':'If you ever wish, a small spelling variation that gives a total friendlier to your Driver and Conductor is traditionally suggested. This is entirely optional, your name is your own.'}</p></div>`;
   else h+=`<div class="card"><h3>Name check</h3><p>Add your full name to see its Chaldean value.</p></div>`;
   return h+'<p class="note">Guidance for reflection only.</p>';
 }
@@ -935,9 +935,9 @@ function gunaMilan(g,bo){ // g girl chart, bo boy chart
   const g1=GANA[bm.nak],g2=GANA[gm.nak]; let gs; if(g1===g2)gs=6; else if(g1+g2===1)gs=5; else if(g1+g2===2)gs=1; else gs=0;
   K.push(['Gana',6,gs,`${GN[g1]} / ${GN[g2]}`]);
   const dist=((gm.sign-bm.sign+12)%12)+1, bk=[2,12,5,9,6,8].includes(dist)&&[2,12,5,9,6,8].includes(((bm.sign-gm.sign+12)%12)+1);
-  K.push(['Bhakoot',7,bk?0:7,`Moon signs ${SIGNS[bm.sign]} / ${SIGNS[gm.sign]}${bk?' — dosha':''}`]);
+  K.push(['Bhakoot',7,bk?0:7,`Moon signs ${SIGNS[bm.sign]} / ${SIGNS[gm.sign]}${bk?', dosha':''}`]);
   const n1=NADI[bm.nak],n2=NADI[gm.nak];
-  K.push(['Nadi',8,n1===n2?0:8,`${NDN[n1]} / ${NDN[n2]}${n1===n2?' — dosha':''}`]);
+  K.push(['Nadi',8,n1===n2?0:8,`${NDN[n1]} / ${NDN[n2]}${n1===n2?', dosha':''}`]);
   return K;
 }
 const mangal=ch=>{const m=ch.planets.Mars, fromL=m.house, fromM=((m.sign-ch.planets.Moon.sign+12)%12)+1, bad=[1,2,4,7,8,12];
@@ -945,7 +945,7 @@ const mangal=ch=>{const m=ch.planets.Mars, fromL=m.house, fromM=((m.sign-ch.plan
 function matchAReport(B,G){
   const cb=chartFor(B), cg=chartFor(G), K=gunaMilan(cg,cb), tot=K.reduce((a,k)=>a+k[2],0);
   const mb=mangal(cb), mg=mangal(cg), nadi=K[7][2]===0, bh=K[6][2]===0;
-  const verdict=tot>=28?['Excellent harmony','good']:tot>=21?['Good compatibility','good']:tot>=18?['Acceptable — worth some conversation','mid']:['Needs care and open conversation','bad'];
+  const verdict=tot>=28?['Excellent harmony','good']:tot>=21?['Good compatibility','good']:tot>=18?['Acceptable, worth some conversation','mid']:['Needs care and open conversation','bad'];
   const md=x=>(x.l||x.m)?'present':'not present';
   const both=(mb.l||mb.m)&&(mg.l||mg.m), one=((mb.l||mb.m)!==(mg.l||mg.m));
   return`<div class="card"><h3>Guna Milan · ${tot%1?tot.toFixed(1):tot} / 36</h3>
@@ -954,9 +954,9 @@ function matchAReport(B,G){
   <div class="tw"><table><tr><th>Koota</th><th>Points</th><th>Max</th><th>Detail</th></tr>${K.map(k=>`<tr><td>${k[0]}</td><td class="${k[2]===k[1]?'good':k[2]===0?'bad':'mid'}"><b>${k[2]}</b></td><td>${k[1]}</td><td>${esc(k[3])}</td></tr>`).join('')}
   <tr><td><b>Total</b></td><td><b>${tot}</b></td><td>36</td><td></td></tr></table></div></div>
   <div class="card"><h3>Key checks</h3><ul class="clean">
-  <li><b>Nadi</b>: ${nadi?'<span class="bad">same Nadi — traditionally a caution (health/children themes); many families look at remedies or other factors</span>':'<span class="good">different Nadi — no dosha</span>'}</li>
-  <li><b>Bhakoot</b>: ${bh?'<span class="bad">dosha present — traditionally linked with emotional or financial friction</span>':'<span class="good">no dosha</span>'}</li>
-  <li><b>Mangal dosha</b>: boy ${md(mb)}, girl ${md(mg)} (Mars in 1/2/4/7/8/12 from Lagna or Moon). ${both?'<span class="good">Both have it, which traditionally balances.</span>':one?'<span class="mid">Only one has it — often discussed with an astrologer.</span>':'<span class="good">Neither has it.</span>'}</li></ul>
+  <li><b>Nadi</b>: ${nadi?'<span class="bad">same Nadi, traditionally a caution (health/children themes); many families look at remedies or other factors</span>':'<span class="good">different Nadi, no dosha</span>'}</li>
+  <li><b>Bhakoot</b>: ${bh?'<span class="bad">dosha present, traditionally linked with emotional or financial friction</span>':'<span class="good">no dosha</span>'}</li>
+  <li><b>Mangal dosha</b>: boy ${md(mb)}, girl ${md(mg)} (Mars in 1/2/4/7/8/12 from Lagna or Moon). ${both?'<span class="good">Both have it, which traditionally balances.</span>':one?'<span class="mid">Only one has it, often discussed with an astrologer.</span>':'<span class="good">Neither has it.</span>'}</li></ul>
   ${B.unknown||G.unknown?'<p class="note">One birth time was unknown, so Mangal dosha (which depends on Lagna) may be approximate. Guna Milan itself uses only the Moon.</p>':''}
   <p class="note">The score is guidance, not a verdict on the couple. Respect, communication, shared values and effort matter far more than any number. Yoni and Vashya scoring here is simplified.</p></div>`;
 }
@@ -968,8 +968,8 @@ function matchNReport(A,Bp){
   const pairs=[['Driver ↔ Driver',a.driver,b.driver,3],['Conductor ↔ Conductor',a.conductor,b.conductor,3],['Driver ↔ Conductor',a.driver,b.conductor,2],['Conductor ↔ Driver',a.conductor,b.driver,2]];
   if(a.nm&&b.nm) pairs.push(['Name ↔ Name',a.nm,b.nm,2]);
   let got=0,max=0; const rows=pairs.map(p=>{const r=rel(p[1],p[2]);const pts=r.s/2*p[3];got+=pts;max+=p[3];return`<tr><td>${p[0]}</td><td>${p[1]} (${NPLANET[p[1]]}) / ${p[2]} (${NPLANET[p[2]]})</td><td class="${r.s>=1.5?'good':r.s===0?'bad':'mid'}">${r.t}</td><td>${pts}/${p[3]}</td></tr>`}).join('');
-  const pct=Math.round(got/max*100), v=pct>=75?['Naturally harmonious','good']:pct>=50?['Workable, with understanding','mid']:['Different rhythms — patience helps','bad'];
-  const show=x=>`<div class="stat"><b>${x.driver} · ${x.conductor}</b><span>${esc(x.name||'—')}: Driver · Conductor${x.nm?' · Name '+x.nm:''}</span></div>`;
+  const pct=Math.round(got/max*100), v=pct>=75?['Naturally harmonious','good']:pct>=50?['Workable, with understanding','mid']:['Different rhythms, patience helps','bad'];
+  const show=x=>`<div class="stat"><b>${x.driver} · ${x.conductor}</b><span>${esc(x.name||'Person')}: Driver · Conductor${x.nm?' · Name '+x.nm:''}</span></div>`;
   return`<div class="card"><h3>Number match · ${pct}%</h3><div class="bar"><i style="width:${pct}%"></i></div><p><b class="${v[1]}">${v[0]}.</b></p>
   <div class="grid">${show(a)}${show(b)}</div>
   <h4>How each figure was calculated</h4><ul class="clean">
@@ -988,7 +988,7 @@ const UPAY={
  Mercury:'For 43 days, feed green fodder to a cow and drop a small coin in flowing water. Speak softly and truthfully.',
  Jupiter:'For 43 days, serve a teacher or elder, and offer chana dal or yellow food at a temple or to a cow.',
  Venus:'For 43 days, feed a cow a fresh roti first thing, keep the home clean and honour the women of the house.',
- Saturn:'For 43 days, feed a dog (black if possible) or crows, and serve a labourer or helper kindly — especially on Saturdays.',
+ Saturn:'For 43 days, feed a dog (black if possible) or crows, and serve a labourer or helper kindly, especially on Saturdays.',
  Rahu:'For 43 days, float a handful of barley or a coconut in flowing water and keep the kitchen and bathroom clean.',
  Ketu:'For 43 days, feed a dog daily and offer a little food to a hungry person. Treat visiting guests kindly.'
 };
@@ -1009,13 +1009,13 @@ function lalReport(b){
   <p class="hint" style="text-align:center">Houses counted from the Lagna. Planets sit in the house shown by their sign.</p></div>
   <div class="card"><h3>Planets in houses · pakka ghar</h3>
   <div class="tw"><table><tr><th>Planet</th><th>House</th><th>Pakka ghar</th><th>Reading</th></tr>
-  ${PL.map(n=>{const ok=PAKKA[n].includes(pl[n].house);return`<tr><td><b>${n}</b></td><td>${pl[n].house}</td><td>${PAKKA[n].join(', ')}</td><td class="${ok?'good':[6,8,12].includes(pl[n].house)?'bad':'mid'}">${ok?'In its own fixed house — steady and strong':[6,8,12].includes(pl[n].house)?'In a testing house — benefits from upay':'Outside its fixed house — results come with effort'}</td></tr>`}).join('')}</table></div></div>
-  <div class="card"><h3>Rin (family debt) checks</h3>${rin.length?`<ul class="clean">${rin.map(r=>`<li><b>${r[0]}</b> — ${r[1]}<br><span class="hint">${r[2]}</span></li>`).join('')}</ul>`:'<p class="good">None of the common rin indications are present in your chart.</p>'}
-  <h4>Sleeping houses</h4><p>${sleeping.length?`Houses ${sleeping.join(', ')} are empty and have no planet in the house opposite — Lal Kitab calls these “sleeping” (soye hue), meaning the matters of that house stay quiet until you actively nurture them.`:'No sleeping houses — every house is either occupied or faces an occupied house.'}</p>
+  ${PL.map(n=>{const ok=PAKKA[n].includes(pl[n].house);return`<tr><td><b>${n}</b></td><td>${pl[n].house}</td><td>${PAKKA[n].join(', ')}</td><td class="${ok?'good':[6,8,12].includes(pl[n].house)?'bad':'mid'}">${ok?'In its own fixed house, steady and strong':[6,8,12].includes(pl[n].house)?'In a testing house, benefits from upay':'Outside its fixed house, results come with effort'}</td></tr>`}).join('')}</table></div></div>
+  <div class="card"><h3>Rin (family debt) checks</h3>${rin.length?`<ul class="clean">${rin.map(r=>`<li><b>${r[0]}</b>: ${r[1]}<br><span class="hint">${r[2]}</span></li>`).join('')}</ul>`:'<p class="good">None of the common rin indications are present in your chart.</p>'}
+  <h4>Sleeping houses</h4><p>${sleeping.length?`Houses ${sleeping.join(', ')} are empty and have no planet in the house opposite, Lal Kitab calls these “sleeping” (soye hue), meaning the matters of that house stay quiet until you actively nurture them.`:'No sleeping houses, every house is either occupied or faces an occupied house.'}</p>
   <p class="hint">Simplified checks based on common Lal Kitab teachings; traditions vary.</p></div>
   <div class="card"><h3>Upay · simple household remedies</h3>
-  <p>Lal Kitab remedies are small, humble acts done for <b>43 days without a break</b> — feeding, serving, or offering to flowing water. No gemstones or expensive items are needed.</p>
-  <ul class="clean">${(unwell.length?unwell:[PL[1]].map(()=>SLORD[ch.lagna])).map(n=>`<li><b>${n}</b> — ${UPAY[n]}</li>`).join('')}</ul>
+  <p>Lal Kitab remedies are small, humble acts done for <b>43 days without a break</b>: feeding, serving, or offering to flowing water. No gemstones or expensive items are needed.</p>
+  <ul class="clean">${(unwell.length?unwell:[PL[1]].map(()=>SLORD[ch.lagna])).map(n=>`<li><b>${n}</b>: ${UPAY[n]}</li>`).join('')}</ul>
   ${rin.length?`<p>For the rin above, begin with the ${unwell.length?'planet remedies and the':''} service-based acts listed under each rin.</p>`:''}
   <p class="note">If you miss a day, start the count again. Do the upay quietly, without announcing it. Guidance for reflection only.</p></div>`;
   return h;
@@ -1045,7 +1045,7 @@ mountBirth('#lalFields','l');
 wireForm('#astroForm','#astroErr','#astroResults',()=>astroReport(readBirth('a')));
 wireForm('#numForm','#numErr','#numResults',()=>{
   const b=readBirth('n',{time:false,place:false}), g=$('#nGender').value;
-  if(!g) throw new Error('Please select a gender — it is only used for the Kua number.');
+  if(!g) throw new Error('Please select a gender, it is only used for the Kua number.');
   return numReport(b,g)});
 wireForm('#matchAForm','#matchAErr','#matchAResults',()=>matchAReport(readBirth('b',{label:'Boy'}),readBirth('g',{label:'Girl'})));
 wireForm('#matchNForm','#matchNErr','#matchNResults',()=>{
