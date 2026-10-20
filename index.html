@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ankho Ka Math — Private Vedic Kundli & Numerology</title>
+<meta name="description" content="Private Vedic kundli, numerology, match-making and Lal Kitab — calculated in your browser, nothing sent away.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#070b1a;--ink2:#0d1430;--panel:rgba(16,24,52,.72);--line:rgba(160,190,220,.16);--teal:#5fd1c4;--gold:#d4b06a;--text:#e8ecf5;--mute:#9aa6c2;--red:#ff7b7b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--text);font:400 16px/1.6 Sora,system-ui,sans-serif;min-height:100vh}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:0 16px}
+header.top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;max-width:1040px;margin:0 auto;padding:16px}
+.logo{font:600 26px 'Cormorant Garamond',serif;color:var(--gold);letter-spacing:.02em;text-decoration:none}
+nav a{color:var(--mute);text-decoration:none;margin-left:20px;font-size:14px}
+nav a:hover{color:var(--teal)}
+.hero{text-align:center;padding:72px 0 56px}
+.hero h1{font:600 clamp(48px,11vw,104px)/1 'Cormorant Garamond',serif;margin:0;color:var(--text);letter-spacing:.01em}
+.hero h1 span{color:var(--gold)}
+.hindi{color:var(--teal);letter-spacing:.2em;font-size:14px;margin-top:10px}
+.slogan{font:italic 500 clamp(20px,3.6vw,28px)/1.4 'Cormorant Garamond',serif;color:var(--text);max-width:720px;margin:26px auto 12px}
+.pitch{color:var(--mute);max-width:600px;margin:0 auto 32px;font-size:15px}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--teal),#3aa89c);color:#04201d;border:0;border-radius:999px;padding:15px 34px;font:600 16px Sora,sans-serif;cursor:pointer;text-decoration:none;min-height:48px}
+.btn:hover{filter:brightness(1.1)}
+.btn.ghost{background:transparent;color:var(--teal);border:1px solid var(--teal);padding:10px 20px;font-size:14px;min-height:40px}
+section.studio{padding:24px 0 60px}
+h2.sec{font:600 38px 'Cormorant Garamond',serif;color:var(--gold);margin:0 0 6px;text-align:center}
+.sub{text-align:center;color:var(--mute);margin:0 0 24px;font-size:14px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:18px;justify-content:center;flex-wrap:wrap}
+.tab{background:var(--panel);color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:11px 18px;font:500 14px Sora,sans-serif;cursor:pointer;min-height:44px;white-space:nowrap}
+.tab[aria-selected=true]{color:#04201d;background:var(--teal);border-color:var(--teal)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;backdrop-filter:blur(8px)}
+.panel h3{font:600 26px 'Cormorant Garamond',serif;color:var(--gold);margin:0 0 4px}
+.panel p.lead{color:var(--mute);margin:0 0 18px;font-size:14px}
+.cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:800px){.cols.two{grid-template-columns:1fr 1fr}}
+.person{border:1px solid var(--line);border-radius:14px;padding:16px;background:rgba(5,9,24,.4)}
+.person h4{margin:0 0 10px;color:var(--teal);font-weight:500}
+.f{margin-bottom:14px}
+.f label{display:block;font-size:13px;color:var(--mute);margin-bottom:5px}
+input[type=text],select,input.txt{width:100%;background:rgba(5,9,24,.7);border:1px solid var(--line);border-radius:10px;color:var(--text);font:400 16px Sora,sans-serif;padding:13px 14px;min-height:48px}
+input:focus,select:focus{outline:2px solid var(--teal);outline-offset:0}
+.hint{font-size:12px;color:var(--mute);margin-top:4px}
+.combo{display:flex;gap:8px;align-items:stretch}
+.combo input[type=text]{flex:1}
+.pick{position:relative;width:48px;min-height:48px;border:1px solid var(--line);border-radius:10px;background:rgba(5,9,24,.7);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;flex:none}
+.pick input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.chk{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:14px;color:var(--text);min-height:40px}
+.chk input{width:22px;height:22px;accent-color:var(--teal)}
+details.adv{margin:4px 0 14px;border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+details.adv summary{cursor:pointer;color:var(--teal);font-size:14px;min-height:36px;display:flex;align-items:center}
+.row3{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.row3 .f:last-child{grid-column:1/-1}
+.err{background:rgba(255,90,90,.12);border:1px solid var(--red);color:#ffc2c2;border-radius:10px;padding:12px 14px;margin:14px 0 0;font-size:14px}
+.err[hidden],.results[hidden]{display:none}
+.results{margin-top:28px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:18px}
+.card h3{font:600 24px 'Cormorant Garamond',serif;color:var(--gold);margin:0 0 10px}
+.card h4{color:var(--teal);margin:14px 0 6px;font-weight:500;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat{background:rgba(5,9,24,.55);border:1px solid var(--line);border-radius:12px;padding:12px}
+.stat b{display:block;font:600 22px 'Cormorant Garamond',serif;color:var(--gold)}
+.stat span{font-size:12px;color:var(--mute)}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--teal);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+tr.now td{background:rgba(95,209,196,.12)}
+.chartbox{max-width:420px;margin:0 auto}
+.chartbox svg{width:100%;height:auto}
+.note{font-size:13px;color:var(--mute);border-left:2px solid var(--gold);padding-left:12px;margin:12px 0}
+.lo{display:grid;grid-template-columns:repeat(3,64px);gap:6px;margin:8px 0}
+.lo div{height:64px;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 18px Sora;color:var(--gold);background:rgba(5,9,24,.55);flex-wrap:wrap;word-break:break-all;padding:2px;text-align:center}
+.lo div.miss{color:#4a5578;border-style:dashed}
+.big{font:600 56px 'Cormorant Garamond',serif;color:var(--gold);line-height:1}
+.bar{height:10px;background:rgba(255,255,255,.08);border-radius:6px;overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--gold))}
+ul.clean{padding-left:18px;margin:6px 0}
+ul.clean li{margin:4px 0}
+.good{color:var(--teal)}.bad{color:var(--red)}.mid{color:var(--gold)}
+.actions{display:flex;gap:10px;justify-content:flex-end;margin-bottom:12px}
+footer{position:relative;z-index:1;text-align:center;padding:36px 16px 48px;color:var(--mute);font-size:13px;max-width:760px;margin:0 auto}
+footer a{color:var(--teal)}
+@media(max-width:560px){nav a{margin-left:12px;font-size:13px}.panel{padding:16px}}
+@media print{
+ body{background:#fff;color:#000}#sky,header.top,.hero,.tabs,.panel,footer,.actions,.noprint{display:none!important}
+ .results{margin:0}.card{background:#fff;border:1px solid #bbb;color:#000;break-inside:avoid}
+ .card h3,.stat b,.big{color:#000}.card h4,th{color:#333}td,th{border-color:#ccc}.note{color:#333}.stat span,.hint{color:#333}
+ .results[hidden]{display:none!important}
+ body:not(.clean) .results{display:block}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<header class="top">
+  <a class="logo" href="#top">Ankho Ka Math</a>
+  <nav><a href="#studio">Reading studio</a><a href="https://vivieknayyar.com" target="_blank" rel="noopener">About Viviek</a></nav>
+</header>
+
+<main class="wrap" id="top">
+  <section class="hero">
+    <h1>Ankho Ka <span>Math</span></h1>
+    <div class="hindi">अंकों का मैथ</div>
+    <p class="slogan">Your story is written in the sky and in your numbers. This is a gentle way to explore your chart and the patterns that shape your life.</p>
+    <p class="pitch">Private Vedic kundli, numerology, match-making and Lal Kitab — calculated in your browser, nothing sent away.</p>
+    <a class="btn" href="#studio" id="beginBtn">Begin a reading</a>
+  </section>
+
+  <section class="studio" id="studio">
+    <h2 class="sec">Reading studio</h2>
+    <p class="sub">No accounts. No server. Everything is worked out on your own device.</p>
+
+    <div class="tabs" role="tablist" id="tabs">
+      <button class="tab" role="tab" data-t="astro" aria-selected="true">Astrology</button>
+      <button class="tab" role="tab" data-t="num" aria-selected="false">Numerology</button>
+      <button class="tab" role="tab" data-t="matchA" aria-selected="false">Match · Astrology</button>
+      <button class="tab" role="tab" data-t="matchN" aria-selected="false">Match · Numerology</button>
+      <button class="tab" role="tab" data-t="lal" aria-selected="false">Lal Kitab</button>
+    </div>
+
+    <div class="panel" id="p-astro" role="tabpanel">
+      <h3>Birth kundli</h3><p class="lead">Your chart, life periods, strengths and gentle remedies.</p>
+      <form id="astroForm" novalidate><div id="astroFields"></div>
+        <button class="btn" type="submit">Generate Kundli</button><div class="err" id="astroErr" hidden role="alert"></div></form>
+    </div>
+
+    <div class="panel" id="p-num" role="tabpanel" hidden>
+      <h3>Numerology</h3><p class="lead">Driver, Conductor, Lo Shu grid, Kua number and a name check.</p>
+      <form id="numForm" novalidate><div id="numFields"></div>
+        <div class="f"><label for="nGender">Gender (used for Kua number)</label>
+          <select id="nGender"><option value="">Select…</option><option value="m">Male</option><option value="f">Female</option></select></div>
+        <button class="btn" type="submit">Get Numerology Reading</button><div class="err" id="numErr" hidden role="alert"></div></form>
+    </div>
+
+    <div class="panel" id="p-matchA" role="tabpanel" hidden>
+      <h3>Match · Astrology</h3><p class="lead">36-point Ashtakoota Guna Milan from two birth charts.</p>
+      <form id="matchAForm" novalidate>
+        <div class="cols two"><div class="person"><h4>Boy / Groom</h4><div id="bFields"></div></div>
+        <div class="person"><h4>Girl / Bride</h4><div id="gFields"></div></div></div><br>
+        <button class="btn" type="submit">Check the Match</button><div class="err" id="matchAErr" hidden role="alert"></div></form>
+    </div>
+
+    <div class="panel" id="p-matchN" role="tabpanel" hidden>
+      <h3>Match · Numerology</h3><p class="lead">Only names and dates of birth are needed.</p>
+      <form id="matchNForm" novalidate>
+        <div class="cols two"><div class="person"><h4>Person 1</h4><div id="pFields"></div></div>
+        <div class="person"><h4>Person 2</h4><div id="qFields"></div></div></div><br>
+        <button class="btn" type="submit">Check the Number Match</button><div class="err" id="matchNErr" hidden role="alert"></div></form>
+    </div>
+
+    <div class="panel" id="p-lal" role="tabpanel" hidden>
+      <h3>Lal Kitab</h3><p class="lead">Your chart read through fixed houses, family debts and simple household upay.</p>
+      <form id="lalForm" novalidate><div id="lalFields"></div>
+        <button class="btn" type="submit">Get Lal Kitab Reading</button><div class="err" id="lalErr" hidden role="alert"></div></form>
+    </div>
+
+    <div class="results" id="astroResults" hidden></div>
+    <div class="results" id="numResults" hidden></div>
+    <div class="results" id="matchAResults" hidden></div>
+    <div class="results" id="matchNResults" hidden></div>
+    <div class="results" id="lalResults" hidden></div>
+  </section>
+</main>
+
+<footer>
+  <p>Ankho Ka Math offers guidance for reflection — not professional, medical, legal or financial advice, and not a prediction of fate. Calculations are approximate (Lahiri sidereal, simplified ephemeris) and made entirely on your device; nothing is stored or sent anywhere.</p>
+  <p>Made by <a href="https://vivieknayyar.com" target="_blank" rel="noopener">Viviek Nayyar</a> · ankokamath.com</p>
+</footer>
+
+<script>
+"use strict";
+/* ============ helpers ============ */
+const $=s=>document.querySelector(s);
+const rad=Math.PI/180, norm=x=>((x%360)+360)%360, S=x=>Math.sin(x*rad), C=x=>Math.cos(x*rad);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const fmtDate=ms=>{const d=new Date(ms);return d.getUTCDate()+' '+MON[d.getUTCMonth()]+' '+d.getUTCFullYear()};
+const ord=n=>n+((n%100>=11&&n%100<=13)?'th':['th','st','nd','rd'][n%10<4?n%10:0]);
+const deg=x=>{const d=Math.floor(x),m=Math.floor((x-d)*60);return d+'°'+String(m).padStart(2,'0')+'′'};
+
+/* ============ world data ============ */
+const RAW=`Afghanistan@Asia/Kabul@Kabul:34.5281:69.1723@Kandahar:31.6289:65.7372@Herat:34.3529:62.2040
+Albania@Europe/Tirane@Tirana:41.3275:19.8187
+Algeria@Africa/Algiers@Algiers:36.7538:3.0588@Oran:35.6971:-0.6308
+Andorra@Europe/Andorra@Andorra la Vella:42.5063:1.5218
+Angola@Africa/Luanda@Luanda:-8.8390:13.2894
+Antigua and Barbuda@America/Antigua@St. John's:17.1274:-61.8468
+Argentina@America/Argentina/Buenos_Aires@Buenos Aires:-34.6037:-58.3816@Córdoba:-31.4201:-64.1888@Rosario:-32.9442:-60.6505
+Armenia@Asia/Yerevan@Yerevan:40.1792:44.4991
+Australia@Australia/Sydney@Canberra:-35.2809:149.1300@Sydney:-33.8688:151.2093@Melbourne:-37.8136:144.9631@Brisbane:-27.4698:153.0251:Australia/Brisbane@Perth:-31.9505:115.8605:Australia/Perth@Adelaide:-34.9285:138.6007:Australia/Adelaide@Darwin:-12.4634:130.8456:Australia/Darwin@Hobart:-42.8821:147.3272:Australia/Hobart@Gold Coast:-28.0167:153.4000:Australia/Brisbane
+Austria@Europe/Vienna@Vienna:48.2082:16.3738@Graz:47.0707:15.4395@Salzburg:47.8095:13.0550
+Azerbaijan@Asia/Baku@Baku:40.4093:49.8671
+Bahamas@America/Nassau@Nassau:25.0343:-77.3963
+Bahrain@Asia/Bahrain@Manama:26.2285:50.5860
+Bangladesh@Asia/Dhaka@Dhaka:23.8103:90.4125@Chittagong:22.3569:91.7832@Khulna:22.8456:89.5403@Sylhet:24.8949:91.8687@Rajshahi:24.3745:88.6042
+Barbados@America/Barbados@Bridgetown:13.1132:-59.5988
+Belarus@Europe/Minsk@Minsk:53.9006:27.5590
+Belgium@Europe/Brussels@Brussels:50.8503:4.3517@Antwerp:51.2194:4.4025
+Belize@America/Belize@Belmopan:17.2510:-88.7590@Belize City:17.4995:-88.1976
+Benin@Africa/Porto-Novo@Porto-Novo:6.4969:2.6289@Cotonou:6.3703:2.3912
+Bhutan@Asia/Thimphu@Thimphu:27.4728:89.6390
+Bolivia@America/La_Paz@La Paz:-16.4897:-68.1193@Santa Cruz:-17.7833:-63.1821
+Bosnia and Herzegovina@Europe/Sarajevo@Sarajevo:43.8563:18.4131
+Botswana@Africa/Gaborone@Gaborone:-24.6282:25.9231
+Brazil@America/Sao_Paulo@Brasília:-15.7939:-47.8828@São Paulo:-23.5505:-46.6333@Rio de Janeiro:-22.9068:-43.1729@Salvador:-12.9777:-38.5016@Manaus:-3.1190:-60.0217:America/Manaus
+Brunei@Asia/Brunei@Bandar Seri Begawan:4.9031:114.9398
+Bulgaria@Europe/Sofia@Sofia:42.6977:23.3219
+Burkina Faso@Africa/Ouagadougou@Ouagadougou:12.3714:-1.5197
+Burundi@Africa/Bujumbura@Gitega:-3.4271:29.9246@Bujumbura:-3.3614:29.3599
+Cabo Verde@Atlantic/Cape_Verde@Praia:14.9331:-23.5133
+Cambodia@Asia/Phnom_Penh@Phnom Penh:11.5564:104.9282
+Cameroon@Africa/Douala@Yaoundé:3.8480:11.5021@Douala:4.0511:9.7679
+Canada@America/Toronto@Ottawa:45.4215:-75.6972@Toronto:43.6532:-79.3832@Montreal:45.5017:-73.5673@Vancouver:49.2827:-123.1207:America/Vancouver@Calgary:51.0447:-114.0719:America/Edmonton@Edmonton:53.5461:-113.4938:America/Edmonton@Winnipeg:49.8951:-97.1384:America/Winnipeg@Halifax:44.6488:-63.5752:America/Halifax@Brampton:43.7315:-79.7624@Mississauga:43.5890:-79.6441@Surrey:49.1913:-122.8490:America/Vancouver@Quebec City:46.8139:-71.2080@Regina:50.4452:-104.6189:America/Regina@St. John's (NL):47.5615:-52.7126:America/St_Johns
+Central African Republic@Africa/Bangui@Bangui:4.3947:18.5582
+Chad@Africa/Ndjamena@N'Djamena:12.1348:15.0557
+Chile@America/Santiago@Santiago:-33.4489:-70.6693
+China@Asia/Shanghai@Beijing:39.9042:116.4074@Shanghai:31.2304:121.4737@Guangzhou:23.1291:113.2644@Shenzhen:22.5431:114.0579@Chengdu:30.5728:104.0668@Wuhan:30.5928:114.3055@Xi'an:34.3416:108.9398
+Colombia@America/Bogota@Bogotá:4.7110:-74.0721@Medellín:6.2442:-75.5812
+Comoros@Indian/Comoro@Moroni:-11.7172:43.2473
+Congo (Republic)@Africa/Brazzaville@Brazzaville:-4.2634:15.2429
+Congo (Democratic Republic)@Africa/Kinshasa@Kinshasa:-4.4419:15.2663@Lubumbashi:-11.6609:27.4794:Africa/Lubumbashi
+Costa Rica@America/Costa_Rica@San José:9.9281:-84.0907
+Côte d'Ivoire@Africa/Abidjan@Yamoussoukro:6.8276:-5.2893@Abidjan:5.3600:-4.0083
+Croatia@Europe/Zagreb@Zagreb:45.8150:15.9819
+Cuba@America/Havana@Havana:23.1136:-82.3666
+Cyprus@Asia/Nicosia@Nicosia:35.1856:33.3823
+Czechia@Europe/Prague@Prague:50.0755:14.4378
+Denmark@Europe/Copenhagen@Copenhagen:55.6761:12.5683@Aarhus:56.1629:10.2039
+Djibouti@Africa/Djibouti@Djibouti:11.8251:42.5903
+Dominica@America/Dominica@Roseau:15.3017:-61.3881
+Dominican Republic@America/Santo_Domingo@Santo Domingo:18.4861:-69.9312
+Ecuador@America/Guayaquil@Quito:-0.1807:-78.4678@Guayaquil:-2.1700:-79.9224
+Egypt@Africa/Cairo@Cairo:30.0444:31.2357@Alexandria:31.2001:29.9187
+El Salvador@America/El_Salvador@San Salvador:13.6929:-89.2182
+Equatorial Guinea@Africa/Malabo@Malabo:3.7504:8.7371
+Eritrea@Africa/Asmara@Asmara:15.3229:38.9251
+Estonia@Europe/Tallinn@Tallinn:59.4370:24.7536
+Eswatini@Africa/Mbabane@Mbabane:-26.3054:31.1367
+Ethiopia@Africa/Addis_Ababa@Addis Ababa:9.0300:38.7400
+Fiji@Pacific/Fiji@Suva:-18.1248:178.4501@Nadi:-17.8000:177.4167@Lautoka:-17.6166:177.4500@Labasa:-16.4333:179.3833
+Finland@Europe/Helsinki@Helsinki:60.1699:24.9384
+France@Europe/Paris@Paris:48.8566:2.3522@Marseille:43.2965:5.3698@Lyon:45.7640:4.8357@Toulouse:43.6047:1.4442@Nice:43.7102:7.2620
+Gabon@Africa/Libreville@Libreville:0.4162:9.4673
+Gambia@Africa/Banjul@Banjul:13.4549:-16.5790
+Georgia@Asia/Tbilisi@Tbilisi:41.7151:44.8271
+Germany@Europe/Berlin@Berlin:52.5200:13.4050@Munich:48.1351:11.5820@Frankfurt:50.1109:8.6821@Hamburg:53.5511:9.9937@Cologne:50.9375:6.9603@Stuttgart:48.7758:9.1829@Düsseldorf:51.2277:6.7735
+Ghana@Africa/Accra@Accra:5.6037:-0.1870@Kumasi:6.6885:-1.6244
+Greece@Europe/Athens@Athens:37.9838:23.7275@Thessaloniki:40.6401:22.9444
+Grenada@America/Grenada@St. George's:12.0561:-61.7488
+Guatemala@America/Guatemala@Guatemala City:14.6349:-90.5069
+Guinea@Africa/Conakry@Conakry:9.6412:-13.5784
+Guinea-Bissau@Africa/Bissau@Bissau:11.8636:-15.5977
+Guyana@America/Guyana@Georgetown:6.8013:-58.1551@Linden:6.0000:-58.3000@New Amsterdam:6.2500:-57.5167
+Haiti@America/Port-au-Prince@Port-au-Prince:18.5944:-72.3074
+Honduras@America/Tegucigalpa@Tegucigalpa:14.0723:-87.1921
+Hong Kong@Asia/Hong_Kong@Hong Kong:22.3193:114.1694
+Hungary@Europe/Budapest@Budapest:47.4979:19.0402
+Iceland@Atlantic/Reykjavik@Reykjavík:64.1466:-21.9426
+India@Asia/Kolkata@New Delhi:28.6139:77.2090@Mumbai:19.0760:72.8777@Kolkata:22.5726:88.3639@Chennai:13.0827:80.2707@Bengaluru:12.9716:77.5946@Hyderabad:17.3850:78.4867@Ahmedabad:23.0225:72.5714@Pune:18.5204:73.8567@Jaipur:26.9124:75.7873@Lucknow:26.8467:80.9462@Chandigarh:30.7333:76.7794@Amritsar:31.6340:74.8723@Ludhiana:30.9010:75.8573@Jalandhar:31.3260:75.5762@Patiala:30.3398:76.3869@Bhopal:23.2599:77.4126@Indore:22.7196:75.8577@Nagpur:21.1458:79.0882@Patna:25.5941:85.1376@Varanasi:25.3176:82.9739@Kanpur:26.4499:80.3319@Agra:27.1767:78.0081@Surat:21.1702:72.8311@Kochi:9.9312:76.2673@Thiruvananthapuram:8.5241:76.9366@Guwahati:26.1445:91.7362@Bhubaneswar:20.2961:85.8245@Ranchi:23.3441:85.3096@Dehradun:30.3165:78.0322@Shimla:31.1048:77.1734@Srinagar:34.0837:74.7973@Jammu:32.7266:74.8570@Gurugram:28.4595:77.0266@Noida:28.5355:77.3910@Ghaziabad:28.6692:77.4538@Faridabad:28.4089:77.3178@Meerut:28.9845:77.7064@Prayagraj:25.4358:81.8463@Jodhpur:26.2389:73.0243@Udaipur:24.5854:73.7125@Raipur:21.2514:81.6296@Visakhapatnam:17.6868:83.2185@Coimbatore:11.0168:76.9558@Madurai:9.9252:78.1198@Mysuru:12.2958:76.6394@Mangaluru:12.9141:74.8560@Panaji (Goa):15.4909:73.8278@Vadodara:22.3072:73.1812@Rajkot:22.3039:70.8022@Karnal:29.6857:76.9905@Ambala:30.3782:76.7767@Hisar:29.1492:75.7217@Rohtak:28.8955:76.6066@Panipat:29.3909:76.9635@Sonipat:28.9931:77.0151@Bathinda:30.2110:74.9455@Mohali:30.7046:76.7179
+Indonesia@Asia/Jakarta@Jakarta:-6.2088:106.8456@Surabaya:-7.2575:112.7521@Bandung:-6.9175:107.6191@Medan:3.5952:98.6722@Denpasar (Bali):-8.6500:115.2167:Asia/Makassar@Makassar:-5.1477:119.4327:Asia/Makassar
+Iran@Asia/Tehran@Tehran:35.6892:51.3890@Mashhad:36.2605:59.6168@Isfahan:32.6546:51.6680
+Iraq@Asia/Baghdad@Baghdad:33.3152:44.3661@Basra:30.5081:47.7835
+Ireland@Europe/Dublin@Dublin:53.3498:-6.2603@Cork:51.8985:-8.4756
+Israel@Asia/Jerusalem@Jerusalem:31.7683:35.2137@Tel Aviv:32.0853:34.7818
+Italy@Europe/Rome@Rome:41.9028:12.4964@Milan:45.4642:9.1900@Naples:40.8518:14.2681@Turin:45.0703:7.6869@Florence:43.7696:11.2558
+Jamaica@America/Jamaica@Kingston:17.9712:-76.7936
+Japan@Asia/Tokyo@Tokyo:35.6762:139.6503@Osaka:34.6937:135.5023@Nagoya:35.1815:136.9066@Yokohama:35.4437:139.6380@Sapporo:43.0618:141.3545
+Jordan@Asia/Amman@Amman:31.9454:35.9284
+Kazakhstan@Asia/Almaty@Astana:51.1605:71.4704@Almaty:43.2220:76.8512
+Kenya@Africa/Nairobi@Nairobi:-1.2921:36.8219@Mombasa:-4.0435:39.6682@Kisumu:-0.0917:34.7680
+Kiribati@Pacific/Tarawa@Tarawa:1.4518:172.9717
+Kosovo@Europe/Belgrade@Pristina:42.6629:21.1655
+Kuwait@Asia/Kuwait@Kuwait City:29.3759:47.9774
+Kyrgyzstan@Asia/Bishkek@Bishkek:42.8746:74.5698
+Laos@Asia/Vientiane@Vientiane:17.9757:102.6331
+Latvia@Europe/Riga@Riga:56.9496:24.1052
+Lebanon@Asia/Beirut@Beirut:33.8938:35.5018
+Lesotho@Africa/Maseru@Maseru:-29.3167:27.4833
+Liberia@Africa/Monrovia@Monrovia:6.3005:-10.7969
+Libya@Africa/Tripoli@Tripoli:32.8872:13.1913
+Liechtenstein@Europe/Vaduz@Vaduz:47.1410:9.5209
+Lithuania@Europe/Vilnius@Vilnius:54.6872:25.2797
+Luxembourg@Europe/Luxembourg@Luxembourg:49.6116:6.1319
+Madagascar@Indian/Antananarivo@Antananarivo:-18.8792:47.5079
+Malawi@Africa/Blantyre@Lilongwe:-13.9626:33.7741@Blantyre:-15.7861:35.0058
+Malaysia@Asia/Kuala_Lumpur@Kuala Lumpur:3.1390:101.6869@George Town (Penang):5.4141:100.3288@Johor Bahru:1.4927:103.7414@Ipoh:4.5975:101.0901@Kota Kinabalu:5.9804:116.0735@Kuching:1.5535:110.3593
+Maldives@Indian/Maldives@Malé:4.1755:73.5093
+Mali@Africa/Bamako@Bamako:12.6392:-8.0029
+Malta@Europe/Malta@Valletta:35.8989:14.5146
+Marshall Islands@Pacific/Majuro@Majuro:7.0897:171.3803
+Mauritania@Africa/Nouakchott@Nouakchott:18.0735:-15.9582
+Mauritius@Indian/Mauritius@Port Louis:-20.1609:57.5012@Curepipe:-20.3175:57.5200@Vacoas-Phoenix:-20.2981:57.4789
+Mexico@America/Mexico_City@Mexico City:19.4326:-99.1332@Guadalajara:20.6597:-103.3496@Monterrey:25.6866:-100.3161@Cancún:21.1619:-86.8515:America/Cancun@Tijuana:32.5149:-117.0382:America/Tijuana
+Micronesia@Pacific/Pohnpei@Palikir:6.9248:158.1610
+Moldova@Europe/Chisinau@Chișinău:47.0105:28.8638
+Monaco@Europe/Monaco@Monaco:43.7384:7.4246
+Mongolia@Asia/Ulaanbaatar@Ulaanbaatar:47.8864:106.9057
+Montenegro@Europe/Podgorica@Podgorica:42.4304:19.2594
+Morocco@Africa/Casablanca@Rabat:34.0209:-6.8416@Casablanca:33.5731:-7.5898
+Mozambique@Africa/Maputo@Maputo:-25.9692:32.5732
+Myanmar@Asia/Yangon@Naypyidaw:19.7633:96.0785@Yangon:16.8661:96.1951@Mandalay:21.9588:96.0891
+Namibia@Africa/Windhoek@Windhoek:-22.5609:17.0658
+Nauru@Pacific/Nauru@Yaren:-0.5477:166.9209
+Nepal@Asia/Kathmandu@Kathmandu:27.7172:85.3240@Pokhara:28.2096:83.9856@Biratnagar:26.4525:87.2718@Birgunj:27.0104:84.8770@Lalitpur:27.6588:85.3247@Janakpur:26.7288:85.9262
+Netherlands@Europe/Amsterdam@Amsterdam:52.3676:4.9041@Rotterdam:51.9244:4.4777@The Hague:52.0705:4.3007@Utrecht:52.0907:5.1214
+New Zealand@Pacific/Auckland@Wellington:-41.2866:174.7756@Auckland:-36.8509:174.7645@Christchurch:-43.5321:172.6362@Hamilton:-37.7870:175.2793@Dunedin:-45.8788:170.5028
+Nicaragua@America/Managua@Managua:12.1150:-86.2362
+Niger@Africa/Niamey@Niamey:13.5116:2.1254
+Nigeria@Africa/Lagos@Abuja:9.0765:7.3986@Lagos:6.5244:3.3792@Kano:12.0022:8.5920@Port Harcourt:4.8156:7.0498@Ibadan:7.3775:3.9470
+North Korea@Asia/Pyongyang@Pyongyang:39.0392:125.7625
+North Macedonia@Europe/Skopje@Skopje:41.9981:21.4254
+Norway@Europe/Oslo@Oslo:59.9139:10.7522@Bergen:60.3913:5.3221
+Oman@Asia/Muscat@Muscat:23.5880:58.3829@Salalah:17.0151:54.0924@Sohar:24.3474:56.7090
+Pakistan@Asia/Karachi@Islamabad:33.6844:73.0479@Karachi:24.8607:67.0011@Lahore:31.5204:74.3587@Rawalpindi:33.5651:73.0169@Faisalabad:31.4504:73.1350@Multan:30.1575:71.5249@Peshawar:34.0151:71.5249@Quetta:30.1798:66.9750@Hyderabad (Sindh):25.3960:68.3578@Sialkot:32.4945:74.5229
+Palau@Pacific/Palau@Ngerulmud:7.5006:134.6243
+Palestine@Asia/Gaza@Ramallah:31.9038:35.2034@Gaza:31.5017:34.4668
+Panama@America/Panama@Panama City:8.9824:-79.5199
+Papua New Guinea@Pacific/Port_Moresby@Port Moresby:-9.4438:147.1803
+Paraguay@America/Asuncion@Asunción:-25.2637:-57.5759
+Peru@America/Lima@Lima:-12.0464:-77.0428
+Philippines@Asia/Manila@Manila:14.5995:120.9842@Quezon City:14.6760:121.0437@Cebu City:10.3157:123.8854@Davao:7.1907:125.4553
+Poland@Europe/Warsaw@Warsaw:52.2297:21.0122@Kraków:50.0647:19.9450
+Portugal@Europe/Lisbon@Lisbon:38.7223:-9.1393@Porto:41.1579:-8.6291
+Puerto Rico@America/Puerto_Rico@San Juan:18.4655:-66.1057
+Qatar@Asia/Qatar@Doha:25.2854:51.5310
+Romania@Europe/Bucharest@Bucharest:44.4268:26.1025
+Russia@Europe/Moscow@Moscow:55.7558:37.6173@Saint Petersburg:59.9311:30.3609@Novosibirsk:55.0084:82.9357:Asia/Novosibirsk@Vladivostok:43.1155:131.8855:Asia/Vladivostok
+Rwanda@Africa/Kigali@Kigali:-1.9441:30.0619
+Saint Kitts and Nevis@America/St_Kitts@Basseterre:17.3026:-62.7177
+Saint Lucia@America/St_Lucia@Castries:14.0101:-60.9875
+Saint Vincent and the Grenadines@America/St_Vincent@Kingstown:13.1587:-61.2248
+Samoa@Pacific/Apia@Apia:-13.8333:-171.7667
+San Marino@Europe/San_Marino@San Marino:43.9424:12.4578
+São Tomé and Príncipe@Africa/Sao_Tome@São Tomé:0.3365:6.7273
+Saudi Arabia@Asia/Riyadh@Riyadh:24.7136:46.6753@Jeddah:21.4858:39.1925@Mecca:21.3891:39.8579@Medina:24.5247:39.5692@Dammam:26.4207:50.0888
+Senegal@Africa/Dakar@Dakar:14.7167:-17.4677
+Serbia@Europe/Belgrade@Belgrade:44.7866:20.4489
+Seychelles@Indian/Mahe@Victoria:-4.6191:55.4513
+Sierra Leone@Africa/Freetown@Freetown:8.4657:-13.2317
+Singapore@Asia/Singapore@Singapore:1.3521:103.8198
+Slovakia@Europe/Bratislava@Bratislava:48.1486:17.1077
+Slovenia@Europe/Ljubljana@Ljubljana:46.0569:14.5058
+Solomon Islands@Pacific/Guadalcanal@Honiara:-9.4456:159.9729
+Somalia@Africa/Mogadishu@Mogadishu:2.0469:45.3182
+South Africa@Africa/Johannesburg@Pretoria:-25.7479:28.2293@Johannesburg:-26.2041:28.0473@Cape Town:-33.9249:18.4241@Durban:-29.8587:31.0218@Gqeberha:-33.9608:25.6022
+South Korea@Asia/Seoul@Seoul:37.5665:126.9780@Busan:35.1796:129.0756
+South Sudan@Africa/Juba@Juba:4.8594:31.5713
+Spain@Europe/Madrid@Madrid:40.4168:-3.7038@Barcelona:41.3874:2.1686@Valencia:39.4699:-0.3763@Seville:37.3891:-5.9845
+Sri Lanka@Asia/Colombo@Colombo:6.9271:79.8612@Sri Jayawardenepura Kotte:6.8905:79.9187@Kandy:7.2906:80.6337@Galle:6.0535:80.2210@Jaffna:9.6615:80.0255
+Sudan@Africa/Khartoum@Khartoum:15.5007:32.5599
+Suriname@America/Paramaribo@Paramaribo:5.8520:-55.2038@Lelydorp:5.7000:-55.2167@Nieuw Nickerie:5.9333:-56.9833
+Sweden@Europe/Stockholm@Stockholm:59.3293:18.0686@Gothenburg:57.7089:11.9746@Malmö:55.6050:13.0038
+Switzerland@Europe/Zurich@Bern:46.9480:7.4474@Zürich:47.3769:8.5417@Geneva:46.2044:6.1432
+Syria@Asia/Damascus@Damascus:33.5138:36.2765
+Taiwan@Asia/Taipei@Taipei:25.0330:121.5654
+Tajikistan@Asia/Dushanbe@Dushanbe:38.5598:68.7870
+Tanzania@Africa/Dar_es_Salaam@Dodoma:-6.1630:35.7516@Dar es Salaam:-6.7924:39.2083@Zanzibar:-6.1659:39.2026
+Thailand@Asia/Bangkok@Bangkok:13.7563:100.5018@Chiang Mai:18.7883:98.9853@Phuket:7.8804:98.3923
+Timor-Leste@Asia/Dili@Dili:-8.5569:125.5603
+Togo@Africa/Lome@Lomé:6.1725:1.2314
+Tonga@Pacific/Tongatapu@Nuku'alofa:-21.1393:-175.2049
+Trinidad and Tobago@America/Port_of_Spain@Port of Spain:10.6549:-61.5019@San Fernando:10.2796:-61.4683@Chaguanas:10.5167:-61.4113@Arima:10.6372:-61.2817@Scarborough:11.1833:-60.7333
+Tunisia@Africa/Tunis@Tunis:36.8065:10.1815
+Turkey@Europe/Istanbul@Ankara:39.9334:32.8597@Istanbul:41.0082:28.9784@Izmir:38.4237:27.1428
+Turkmenistan@Asia/Ashgabat@Ashgabat:37.9601:58.3261
+Tuvalu@Pacific/Funafuti@Funafuti:-8.5211:179.1983
+Uganda@Africa/Kampala@Kampala:0.3476:32.5825
+Ukraine@Europe/Kyiv@Kyiv:50.4501:30.5234
+United Arab Emirates@Asia/Dubai@Abu Dhabi:24.4539:54.3773@Dubai:25.2048:55.2708@Sharjah:25.3463:55.4209@Ajman:25.4052:55.5136@Ras Al Khaimah:25.7895:55.9432
+United Kingdom@Europe/London@London:51.5074:-0.1278@Birmingham:52.4862:-1.8904@Manchester:53.4808:-2.2426@Leeds:53.8008:-1.5491@Glasgow:55.8642:-4.2518@Edinburgh:55.9533:-3.1883@Leicester:52.6369:-1.1398@Bradford:53.7960:-1.7594@Coventry:52.4068:-1.5197@Southall:51.5074:-0.3780@Slough:51.5105:-0.5950@Wolverhampton:52.5870:-2.1288@Cardiff:51.4816:-3.1791@Belfast:54.5973:-5.9301@Liverpool:53.4084:-2.9916
+United States@America/New_York@Washington, D.C.:38.9072:-77.0369@New York:40.7128:-74.0060@Los Angeles:34.0522:-118.2437:America/Los_Angeles@Chicago:41.8781:-87.6298:America/Chicago@Houston:29.7604:-95.3698:America/Chicago@San Francisco:37.7749:-122.4194:America/Los_Angeles@San Jose:37.3382:-121.8863:America/Los_Angeles@Seattle:47.6062:-122.3321:America/Los_Angeles@Dallas:32.7767:-96.7970:America/Chicago@Atlanta:33.7490:-84.3880@Boston:42.3601:-71.0589@Philadelphia:39.9526:-75.1652@Miami:25.7617:-80.1918@Detroit:42.3314:-83.0458@Edison (NJ):40.5187:-74.4121@Jersey City:40.7178:-74.0431@Phoenix:33.4484:-112.0740:America/Phoenix@Denver:39.7392:-104.9903:America/Denver@Las Vegas:36.1699:-115.1398:America/Los_Angeles@Fremont:37.5485:-121.9886:America/Los_Angeles@Austin:30.2672:-97.7431:America/Chicago@Honolulu:21.3069:-157.8583:Pacific/Honolulu@Anchorage:61.2181:-149.9003:America/Anchorage@San Diego:32.7157:-117.1611:America/Los_Angeles@Minneapolis:44.9778:-93.2650:America/Chicago
+Uruguay@America/Montevideo@Montevideo:-34.9011:-56.1645
+Uzbekistan@Asia/Tashkent@Tashkent:41.2995:69.2401
+Vanuatu@Pacific/Efate@Port Vila:-17.7333:168.3273
+Vatican City@Europe/Vatican@Vatican City:41.9029:12.4534
+Venezuela@America/Caracas@Caracas:10.4806:-66.9036
+Vietnam@Asia/Ho_Chi_Minh@Hanoi:21.0285:105.8542@Ho Chi Minh City:10.8231:106.6297
+Yemen@Asia/Aden@Sana'a:15.3694:44.1910@Aden:12.7855:45.0187
+Zambia@Africa/Lusaka@Lusaka:-15.3875:28.3228
+Zimbabwe@Africa/Harare@Harare:-17.8252:31.0335@Bulawayo:-20.1325:28.6265`;
+
+const COUNTRIES=RAW.split('\n').map(l=>{
+  const p=l.split('@'), name=p[0], tz=p[1];
+  const cities=p.slice(2).map(c=>{const q=c.split(':');return{name:q[0],lat:+q[1],lon:+q[2],tz:q[3]||tz}});
+  return{name,tz,cities};
+});
+const CMAP=new Map(COUNTRIES.map(c=>[c.name.toLowerCase(),c]));
+const ALIAS={usa:'United States',us:'United States','u.s.':'United States',america:'United States','united states of america':'United States',uk:'United Kingdom',england:'United Kingdom',britain:'United Kingdom','great britain':'United Kingdom',scotland:'United Kingdom',wales:'United Kingdom',uae:'United Arab Emirates',emirates:'United Arab Emirates',korea:'South Korea','czech republic':'Czechia',burma:'Myanmar','ivory coast':"Côte d'Ivoire",holland:'Netherlands',turkiye:'Turkey',türkiye:'Turkey',swaziland:'Eswatini','cape verde':'Cabo Verde','east timor':'Timor-Leste',russian:'Russia',bharat:'India',hindustan:'India'};
+function resolveCountry(v){
+  const k=String(v||'').trim().toLowerCase(); if(!k) return null;
+  return CMAP.get(k)||(ALIAS[k]&&CMAP.get(ALIAS[k].toLowerCase()))||null;
+}
+
+/* ============ time zone ============ */
+function tzOffset(tz,y,m,d,h,mi){
+  const t=String(tz).trim();
+  if(!t) throw new Error('Time zone is empty. Choose a city or open Advanced to enter one (e.g. Asia/Kolkata or +5.5).');
+  if(/^[+-]?\d+(\.\d+)?$/.test(t)) return parseFloat(t);
+  const mm=t.match(/^(?:UTC|GMT)?\s*([+-])(\d{1,2}):?(\d{2})?$/i);
+  if(mm) return (mm[1]==='-'?-1:1)*(+mm[2]+(+mm[3]||0)/60);
+  let fmt;
+  try{fmt=new Intl.DateTimeFormat('en-US',{timeZone:t,hourCycle:'h23',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',second:'numeric'})}
+  catch(e){throw new Error('Unknown time zone "'+t+'". Use a name like Asia/Kolkata or an offset like +5.5.')}
+  const local=Date.UTC(y,m-1,d,h,mi);
+  const offAt=utc=>{const p={};fmt.formatToParts(new Date(utc)).forEach(x=>p[x.type]=x.value);
+    return (Date.UTC(+p.year,+p.month-1,+p.day,(+p.hour)%24,+p.minute,+p.second)-Math.floor(utc/1000)*1000)/3600000};
+  let off=offAt(local); off=offAt(local-off*3600000); return off;
+}
+
+/* ============ astronomy (Schlyter elements, Lahiri ayanamsa) ============ */
+const EL={
+ Sun:d=>({N:0,i:0,w:282.9404+4.70935e-5*d,a:1,e:0.016709-1.151e-9*d,M:356.0470+0.9856002585*d}),
+ Moon:d=>({N:125.1228-0.0529538083*d,i:5.1454,w:318.0634+0.1643573223*d,a:60.2666,e:0.0549,M:115.3654+13.0649929509*d}),
+ Mercury:d=>({N:48.3313+3.24587e-5*d,i:7.0047+5.00e-8*d,w:29.1241+1.01444e-5*d,a:0.387098,e:0.205635+5.59e-10*d,M:168.6562+4.0923344368*d}),
+ Venus:d=>({N:76.6799+2.46590e-5*d,i:3.3946+2.75e-8*d,w:54.8910+1.38374e-5*d,a:0.723330,e:0.006773-1.302e-9*d,M:48.0052+1.6021302244*d}),
+ Mars:d=>({N:49.5574+2.11081e-5*d,i:1.8497-1.78e-8*d,w:286.5016+2.92961e-5*d,a:1.523688,e:0.093405+2.516e-9*d,M:18.6021+0.5240207766*d}),
+ Jupiter:d=>({N:100.4542+2.76854e-5*d,i:1.3030-1.557e-7*d,w:273.8777+1.64505e-5*d,a:5.20256,e:0.048498+4.469e-9*d,M:19.8950+0.0830853001*d}),
+ Saturn:d=>({N:113.6634+2.38980e-5*d,i:2.4886-1.081e-7*d,w:339.3939+2.97661e-5*d,a:9.55475,e:0.055546-9.499e-9*d,M:316.9670+0.0334442282*d})
+};
+function kepler(Mdeg,e){
+  const M=Mdeg*rad; let E=M+e*Math.sin(M)*(1+e*Math.cos(M));
+  for(let i=0;i<10;i++){const dE=(E-e*Math.sin(E)-M)/(1-e*Math.cos(E));E-=dE;if(Math.abs(dE)<1e-9)break}
+  return E;
+}
+function helio(el){
+  const E=kepler(el.M,el.e), xv=el.a*(Math.cos(E)-el.e), yv=el.a*Math.sqrt(1-el.e*el.e)*Math.sin(E);
+  const v=Math.atan2(yv,xv)/rad, r=Math.hypot(xv,yv), vw=v+el.w;
+  return{x:r*(C(el.N)*C(vw)-S(el.N)*S(vw)*C(el.i)),y:r*(S(el.N)*C(vw)+C(el.N)*S(vw)*C(el.i)),z:r*S(vw)*S(el.i),r};
+}
+function tropical(d){
+  const se=EL.Sun(d), s=helio(se), out={Sun:norm(Math.atan2(s.y,s.x)/rad)};
+  const Ms=se.M, Ls=Ms+se.w;
+  const me=EL.Moon(d), m=helio(me);
+  const Lm=me.M+me.w+me.N, D=Lm-Ls, F=Lm-me.N, Mm=me.M;
+  let ml=Math.atan2(m.y,m.x)/rad;
+  ml+=-1.274*S(Mm-2*D)+0.658*S(2*D)-0.186*S(Ms)-0.059*S(2*Mm-2*D)-0.057*S(Mm-2*D+Ms)+0.053*S(Mm+2*D)+0.046*S(2*D-Ms)+0.041*S(Mm-Ms)-0.035*S(D)-0.031*S(Mm+Ms)-0.015*S(2*F-2*D)+0.011*S(Mm-4*D);
+  out.Moon=norm(ml);
+  const Mj=EL.Jupiter(d).M, Msat=EL.Saturn(d).M;
+  for(const n of ['Mercury','Venus','Mars','Jupiter','Saturn']){
+    const h=helio(EL[n](d));
+    let lon=Math.atan2(h.y+s.y,h.x+s.x)/rad;
+    if(n==='Jupiter') lon+=-0.332*S(2*Mj-5*Msat-67.6)-0.056*S(2*Mj-2*Msat+21)+0.042*S(3*Mj-5*Msat+21)-0.036*S(Mj-2*Msat)+0.022*C(Mj-Msat)+0.023*S(2*Mj-3*Msat+52)-0.016*S(Mj-5*Msat-69);
+    if(n==='Saturn') lon+=0.812*S(2*Mj-5*Msat-67.6)-0.229*C(2*Mj-4*Msat-2)+0.119*S(Mj-2*Msat-3)+0.046*S(2*Mj-6*Msat-69)+0.014*S(Mj-3*Msat+32);
+    out[n]=norm(lon);
+  }
+  out.Rahu=norm(me.N); out.Ketu=norm(me.N+180);
+  return out;
+}
+const ayanamsa=jd=>23.85306+(jd-2451545)/365.25*0.013972;
+function ascendant(jd,lat,lon){
+  const T=(jd-2451545)/36525;
+  const gmst=norm(280.46061837+360.98564736629*(jd-2451545)+0.000387933*T*T);
+  const ramc=norm(gmst+lon), eps=23.4392911-0.0130042*T;
+  return norm(Math.atan2(C(ramc),-(S(ramc)*C(eps)+Math.tan(lat*rad)*S(eps)))/rad);
+}
+const PL=['Sun','Moon','Mars','Mercury','Jupiter','Venus','Saturn','Rahu','Ketu'];
+const AB={Sun:'Su',Moon:'Mo',Mars:'Ma',Mercury:'Me',Jupiter:'Ju',Venus:'Ve',Saturn:'Sa',Rahu:'Ra',Ketu:'Ke'};
+const SIGNS=['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+const SLORD=['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter'];
+const NAK=['Ashwini','Bharani','Krittika','Rohini','Mrigashira','Ardra','Punarvasu','Pushya','Ashlesha','Magha','Purva Phalguni','Uttara Phalguni','Hasta','Chitra','Swati','Vishakha','Anuradha','Jyeshtha','Mula','Purva Ashadha','Uttara Ashadha','Shravana','Dhanishta','Shatabhisha','Purva Bhadrapada','Uttara Bhadrapada','Revati'];
+const EXALT={Sun:0,Moon:1,Mars:9,Mercury:5,Jupiter:3,Venus:11,Saturn:6};
+const DEBIL={Sun:6,Moon:7,Mars:3,Mercury:11,Jupiter:9,Venus:5,Saturn:0};
+const OWN={Sun:[4],Moon:[3],Mars:[0,7],Mercury:[2,5],Jupiter:[8,11],Venus:[1,6],Saturn:[9,10]};
+
+function chartAtJD(jd,lat,lon){
+  const d=jd-2451543.5, ay=ayanamsa(jd);
+  const t=tropical(d), t2=tropical(d+1);
+  const planets={};
+  for(const n of PL){
+    const lng=norm(t[n]-ay), sign=Math.floor(lng/30);
+    let retro=false;
+    if(['Mars','Mercury','Jupiter','Venus','Saturn'].includes(n)){let df=norm(t2[n]-t[n]);if(df>180)df-=360;retro=df<0}
+    if(n==='Rahu'||n==='Ketu') retro=true;
+    const nk=Math.floor(lng/(360/27));
+    planets[n]={lng,sign,deg:lng%30,retro,nak:nk,pada:Math.floor((lng%(360/27))/(360/108))+1};
+  }
+  const asc=norm(ascendant(jd,lat,lon)-ay), lagna=Math.floor(asc/30);
+  for(const n of PL) planets[n].house=((planets[n].sign-lagna+12)%12)+1;
+  return{jd,ay,asc,lagna,ascDeg:asc%30,planets};
+}
+
+/* ---- Vimshottari ---- */
+const DL=['Ketu','Venus','Sun','Moon','Mars','Rahu','Jupiter','Saturn','Mercury'];
+const DY={Ketu:7,Venus:20,Sun:6,Moon:10,Mars:7,Rahu:18,Jupiter:16,Saturn:19,Mercury:17};
+const YMS=365.2425*86400000;
+function dashas(moonLng,birthMs){
+  const per=360/27, nk=Math.floor(moonLng/per), frac=(moonLng%per)/per;
+  const i0=nk%9, list=[];
+  let start=birthMs-DY[DL[i0]]*frac*YMS;
+  for(let k=0;k<9;k++){
+    const L=DL[(i0+k)%9], end=start+DY[L]*YMS;
+    list.push({lord:L,start:Math.max(start,birthMs),end,fullStart:start,full:DY[L]});
+    start=end;
+  }
+  return list;
+}
+function antars(m){
+  const i=DL.indexOf(m.lord), out=[]; let s=m.fullStart;
+  for(let k=0;k<9;k++){const A=DL[(i+k)%9], len=m.full*DY[A]/120*YMS; out.push({lord:A,start:s,end:s+len}); s+=len}
+  return out;
+}
+
+/* ---- Ashtakavarga ---- */
+const BAV={
+ Sun:{Sun:[1,2,4,7,8,9,10,11],Moon:[3,6,10,11],Mars:[1,2,4,7,8,9,10,11],Mercury:[3,5,6,9,10,11,12],Jupiter:[5,6,9,11],Venus:[6,7,12],Saturn:[1,2,4,7,8,9,10,11],Lagna:[3,4,6,10,11,12]},
+ Moon:{Sun:[3,6,7,8,10,11],Moon:[1,3,6,7,10,11],Mars:[2,3,5,6,9,10,11],Mercury:[1,3,4,5,7,8,10,11],Jupiter:[1,4,7,8,10,11,12],Venus:[3,4,5,7,9,10,11],Saturn:[3,5,6,11],Lagna:[3,6,10,11]},
+ Mars:{Sun:[3,5,6,10,11],Moon:[3,6,11],Mars:[1,2,4,7,8,10,11],Mercury:[3,5,6,11],Jupiter:[6,10,11,12],Venus:[6,8,11,12],Saturn:[1,4,7,8,9,10,11],Lagna:[1,3,6,10,11]},
+ Mercury:{Sun:[5,6,9,11,12],Moon:[2,4,6,8,10,11],Mars:[1,2,4,7,8,9,10,11],Mercury:[1,3,5,6,9,10,11,12],Jupiter:[6,8,11,12],Venus:[1,2,3,4,5,8,9,11],Saturn:[1,2,4,7,8,9,10,11],Lagna:[1,2,4,6,8,10,11]},
+ Jupiter:{Sun:[1,2,3,4,7,8,9,10,11],Moon:[2,5,7,9,11],Mars:[1,2,4,7,8,10,11],Mercury:[1,2,4,5,6,9,10,11],Jupiter:[1,2,3,4,7,8,10,11],Venus:[2,5,6,9,10,11],Saturn:[3,5,6,12],Lagna:[1,2,4,5,6,7,9,10,11]},
+ Venus:{Sun:[8,11,12],Moon:[1,2,3,4,5,8,9,11,12],Mars:[3,5,6,9,11,12],Mercury:[3,5,6,9,11],Jupiter:[5,8,9,10,11],Venus:[1,2,3,4,5,8,9,10,11],Saturn:[3,4,5,8,9,10,11],Lagna:[1,2,3,4,5,8,9,11]},
+ Saturn:{Sun:[1,2,4,7,8,10,11],Moon:[3,6,11],Mars:[3,5,6,10,11,12],Mercury:[6,8,9,10,11,12],Jupiter:[5,6,11,12],Venus:[6,11,12],Saturn:[3,5,6,11],Lagna:[1,3,4,6,10,11]}
+};
+function ashtakavarga(ch){
+  const names=Object.keys(BAV), bav={}, sav=Array(12).fill(0);
+  for(const tgt of names){
+    const row=Array(12).fill(0);
+    for(const src of Object.keys(BAV[tgt])){
+      const from=src==='Lagna'?ch.lagna:ch.planets[src].sign;
+      for(const h of BAV[tgt][src]) row[(from+h-1)%12]++;
+    }
+    bav[tgt]=row; row.forEach((v,i)=>sav[i]+=v);
+  }
+  return{bav,sav};
+}
+
+/* ---- chart SVG ---- */
+function northChart(ch){
+  const P=[[200,92],[100,38],[35,100],[100,200],[35,300],[100,362],[200,308],[300,362],[365,300],[300,200],[365,100],[300,38]];
+  let s='<svg viewBox="0 0 400 400" role="img" aria-label="North Indian birth chart"><g fill="none" stroke="#d4b06a" stroke-width="1.4"><rect x="2" y="2" width="396" height="396"/><path d="M2 2L398 398M398 2L2 398M200 2L2 200L200 398L398 200Z"/></g>';
+  for(let h=1;h<=12;h++){
+    const sign=(ch.lagna+h-1)%12, pls=PL.filter(n=>ch.planets[n].house===h).map(n=>AB[n]+(ch.planets[n].retro&&n!=='Rahu'&&n!=='Ketu'?'ᴿ':''));
+    const [x,y]=P[h-1], lines=[]; for(let i=0;i<pls.length;i+=2) lines.push(pls.slice(i,i+2).join(' '));
+    const y0=y-(lines.length-1)*8;
+    s+=`<text x="${x}" y="${y0-14}" text-anchor="middle" font-size="12" fill="#d4b06a" opacity=".85">${sign+1}</text>`;
+    lines.forEach((l,i)=>{s+=`<text x="${x}" y="${y0+i*16+2}" text-anchor="middle" font-size="14" fill="#5fd1c4" font-weight="600">${l}</text>`});
+  }
+  s+=`<text x="200" y="215" text-anchor="middle" font-size="11" fill="#9aa6c2">Lagna · ${SIGNS[ch.lagna]}</text></svg>`;
+  return s;
+}
+
+/* ---- text content ---- */
+const THEME=['','self, vitality and fresh starts','money, family and speech','effort, courage and siblings','home, comfort and inner peace','creativity, learning and children','work routines, service and health habits','partnerships and relationships','change, research and rest','luck, mentors and higher learning','career and public standing','gains, friends and goals','rest, reflection and expenses'];
+const GOOD={Moon:[1,3,6,7,10,11],Sun:[3,6,10,11],Mars:[3,6,11],Jupiter:[2,5,7,9,11],Saturn:[3,6,11]};
+function fore(ch,now,name){
+  const nm=ch.planets.Moon.sign, t=tropical(now.jd-2451543.5), ay=ayanamsa(now.jd);
+  const h=n=>((Math.floor(norm(t[n]-ay)/30)-nm+12)%12)+1;
+  const line=(n)=>{const hh=h(n), g=GOOD[n].includes(hh);
+    return`<li><b>${n}</b> moves through your ${ord(hh)} house from the Moon (${esc(THEME[hh])}) — <span class="${g?'good':'mid'}">${g?'a supportive influence':'ask for patience and steadiness'}</span>.</li>`};
+  return`<h4>Daily feel</h4><ul class="clean">${line('Moon')}</ul>
+  <h4>Weekly feel</h4><ul class="clean">${line('Mars')}</ul>
+  <h4>Monthly feel</h4><ul class="clean">${line('Sun')}</ul>
+  <h4>Yearly feel</h4><ul class="clean">${line('Jupiter')}${line('Saturn')}</ul>
+  <p class="note">Based on today's sky counted from your natal Moon. Treat these as prompts for reflection, not predictions.</p>`;
+}
+const REM={
+ Sun:'Greet the morning sun with a few calm breaths, offer water to it, and show respect to your father or elders. Sundays suit steady, honest effort.',
+ Moon:'Spend quiet time near water or moonlight, keep sleep regular, and care for your mother or elder women. Mondays suit rest and reflection.',
+ Mars:'Channel energy into exercise or a physical task, share sweets with others and keep your temper cool. Tuesdays suit courage and discipline.',
+ Mercury:'Read, write or learn something every day, keep speech gentle and feed a cow green fodder. Wednesdays suit study and clear communication.',
+ Jupiter:'Respect teachers and mentors, share knowledge, and offer yellow foods such as chana dal. Thursdays suit gratitude and learning.',
+ Venus:'Keep your home tidy and beautiful, respect the women in your life and share something sweet. Fridays suit art, love and harmony.',
+ Saturn:'Serve those who work hard — helpers, labourers, the elderly — and keep promises. Saturdays suit patience and simple routine.',
+ Rahu:'Reduce clutter and screen-time, stay grounded in routine, and offer a handful of barley or a coconut to flowing water with a quiet wish.',
+ Ketu:'Feed a stray dog, spend a little time in silence or meditation, and let go of one thing you no longer need.'
+};
+function remedies(ch){
+  const weak=PL.filter(n=>n!=='Rahu'&&n!=='Ketu'&&(DEBIL[n]===ch.planets[n].sign||[6,8,12].includes(ch.planets[n].house))||(n==='Rahu'||n==='Ketu')&&[1,5,7,8].includes(ch.planets[n].house));
+  let h='';
+  if(weak.length){h+='<p>These planets are worth a little extra care in your chart (debilitated, or in the 6th/8th/12th house). Gentle habits, not gemstones, are suggested:</p><ul class="clean">';
+    weak.forEach(n=>{h+=`<li><b>${n}</b> — ${REM[n]}</li>`});h+='</ul>'}
+  const lord=SLORD[ch.lagna];
+  h+=`<p>For overall balance, honour your Lagna lord <b>${lord}</b>: ${REM[lord]}</p>`;
+  return h;
+}
+
+/* ---- Birth input handling ---- */
+const FIELD_STATE={};
+function birthBlock(p,o){
+  o=o||{}; const time=o.time!==false, place=o.place!==false;
+  let h=`<div class="f"><label for="${p}Name">Full name</label><input type="text" class="txt" id="${p}Name" autocomplete="name" placeholder="Your full name"></div>
+  <div class="f"><label for="${p}Dob">Date of birth</label><div class="combo"><input type="text" id="${p}Dob" inputmode="numeric" autocomplete="off" placeholder="DD/MM/YYYY" maxlength="10"><label class="pick" title="Pick a date">📅<input type="date" id="${p}DobPick" min="1800-01-01" max="2100-12-31" aria-label="Pick date of birth"></label></div><div class="hint">e.g. 15/08/1990</div></div>`;
+  if(time) h+=`<div class="f"><label for="${p}Tob">Time of birth</label><div class="combo"><input type="text" id="${p}Tob" autocomplete="off" placeholder="14:30 or 2:30 PM" maxlength="10"><label class="pick" title="Pick a time">🕑<input type="time" id="${p}TobPick" aria-label="Pick time of birth"></label></div>
+  <div class="hint">e.g. 14:30 or 2:30 PM</div>
+  <label class="chk"><input type="checkbox" id="${p}Unk"> Birth time unknown</label>
+  <div class="hint" id="${p}UnkNote" hidden>We'll use 12:00 noon. Your Lagna (rising sign) and house placements may be approximate.</div></div>`;
+  if(place) h+=`<div class="f"><label for="${p}Country">Country</label><input type="text" id="${p}Country" list="countryList" autocomplete="off" placeholder="Type to search countries"></div>
+  <div class="f"><label for="${p}City">City / town</label><input type="text" id="${p}City" list="${p}Cities" autocomplete="off" placeholder="Start typing your city"><datalist id="${p}Cities"></datalist>
+  <div class="hint">Pick country, then city — coordinates and timezone fill automatically. If your town isn't listed, choose the nearest city or enter coordinates under Advanced.</div><div class="hint good" id="${p}LocNote"></div></div>
+  <details class="adv" id="${p}Adv"><summary>Advanced: coordinates &amp; time zone</summary><div class="row3">
+  <div class="f"><label for="${p}Lat">Latitude</label><input type="text" id="${p}Lat" inputmode="decimal" placeholder="28.6139"></div>
+  <div class="f"><label for="${p}Lon">Longitude</label><input type="text" id="${p}Lon" inputmode="decimal" placeholder="77.2090"></div>
+  <div class="f"><label for="${p}Tz">Time zone</label><input type="text" id="${p}Tz" placeholder="Asia/Kolkata or +5.5"><div class="hint">Use a name such as Asia/Kolkata (daylight saving is handled), or a UTC offset like +5.5.</div></div></div></details>`;
+  return h;
+}
+function wireDate(p){
+  const t=$('#'+p+'Dob'), pk=$('#'+p+'DobPick');
+  t.addEventListener('input',()=>{const d=t.value.replace(/\D/g,'').slice(0,8);let o=d.slice(0,2);if(d.length>2)o+='/'+d.slice(2,4);if(d.length>4)o+='/'+d.slice(4,8);t.value=o;
+    const m=o.match(/^(\d\d)\/(\d\d)\/(\d{4})$/);if(m)pk.value=`${m[3]}-${m[2]}-${m[1]}`});
+  pk.addEventListener('change',()=>{const m=pk.value.match(/^(\d{4})-(\d\d)-(\d\d)$/);if(m)t.value=`${m[3]}/${m[2]}/${m[1]}`});
+  pk.addEventListener('click',()=>{try{pk.showPicker&&pk.showPicker()}catch(e){}});
+}
+function wireTime(p){
+  const t=$('#'+p+'Tob'); if(!t) return;
+  const pk=$('#'+p+'TobPick'), u=$('#'+p+'Unk'), note=$('#'+p+'UnkNote');
+  pk.addEventListener('change',()=>{if(pk.value)t.value=pk.value});
+  pk.addEventListener('click',()=>{try{pk.showPicker&&pk.showPicker()}catch(e){}});
+  u.addEventListener('change',()=>{t.disabled=pk.disabled=u.checked;note.hidden=!u.checked;if(u.checked)t.value='12:00'});
+}
+function wireLocation(p){
+  const c=$('#'+p+'Country'); if(!c) return;
+  const city=$('#'+p+'City'), dl=$('#'+p+'Cities'), lat=$('#'+p+'Lat'), lon=$('#'+p+'Lon'), tz=$('#'+p+'Tz'), adv=$('#'+p+'Adv'), note=$('#'+p+'LocNote');
+  const st=FIELD_STATE[p]={country:null,city:null};
+  function fillCountry(){
+    const k=resolveCountry(c.value);
+    if(k===st.country) return;
+    st.country=k; st.city=null; city.value=''; lat.value=lon.value=''; note.textContent='';
+    dl.innerHTML=k?k.cities.map(x=>`<option value="${esc(x.name)}">`).join(''):'';
+    tz.value=k?k.tz:'';
+  }
+  function fillCity(){
+    if(!st.country) return;
+    const v=city.value.trim().toLowerCase();
+    const hit=st.country.cities.find(x=>x.name.toLowerCase()===v);
+    if(hit){st.city=hit;lat.value=hit.lat;lon.value=hit.lon;tz.value=hit.tz;note.className='hint good';note.textContent=`✓ ${hit.name}: ${hit.lat}, ${hit.lon} · ${hit.tz}`}
+    else if(v){ if(st.city){lat.value=lon.value=''} st.city=null; adv.open=true; note.className='hint mid'; note.textContent='Not in our list — enter latitude and longitude under Advanced (a quick map search will give them).'}
+    else {st.city=null; note.textContent=''}
+  }
+  c.addEventListener('input',fillCountry);
+  c.addEventListener('change',()=>{fillCountry();if(st.country)c.value=st.country.name});
+  city.addEventListener('input',fillCity); city.addEventListener('change',fillCity);
+  [lat,lon,tz].forEach(e=>e.addEventListener('input',()=>{st.city=st.city&&null}));
+  // default India
+  c.value='India'; fillCountry();
+}
+function mountBirth(id,p,o){ $(id).innerHTML=birthBlock(p,o); wireDate(p); wireTime(p); wireLocation(p); }
+
+function parseDob(v){
+  const m=String(v).trim().match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/);
+  if(!m) throw new Error('Please enter the date of birth as DD/MM/YYYY, e.g. 15/08/1990.');
+  const d=+m[1],mo=+m[2],y=+m[3], dt=new Date(Date.UTC(y,mo-1,d));
+  if(mo<1||mo>12||dt.getUTCDate()!==d||dt.getUTCMonth()!==mo-1) throw new Error('That date of birth does not exist. Please check the day and month.');
+  if(y<1800||y>2100) throw new Error('Please use a birth year between 1800 and 2100.');
+  return{d,m:mo,y};
+}
+function parseTob(v){
+  const s=String(v).trim().toLowerCase().replace(/\./g,'');
+  const m=s.match(/^(\d{1,2})(?::?(\d{2}))?\s*(am|pm)?$/);
+  if(!m) throw new Error('Please enter the time of birth like 14:30 or 2:30 PM.');
+  let h=+m[1],mi=+(m[2]||0);
+  if(m[3]){ if(h<1||h>12) throw new Error('With AM/PM the hour must be 1–12.'); h=h%12+(m[3]==='pm'?12:0) }
+  if(h>23||mi>59) throw new Error('That time of birth is not valid. Use 00:00 to 23:59, or AM/PM.');
+  return{h,mi};
+}
+function readBirth(p,o){
+  o=o||{}; const wantT=o.time!==false, wantP=o.place!==false;
+  const lab=o.label?o.label+': ':'';
+  const wrap=fn=>{try{return fn()}catch(e){throw new Error(lab+e.message)}};
+  const name=($('#'+p+'Name').value||'').trim();
+  const dob=wrap(()=>parseDob($('#'+p+'Dob').value));
+  let tob={h:12,mi:0}, unknown=false;
+  if(wantT){ unknown=$('#'+p+'Unk').checked; if(!unknown) tob=wrap(()=>parseTob($('#'+p+'Tob').value)); }
+  const r={name,...dob,...tob,unknown,label:o.label||''};
+  if(wantP){
+    const st=FIELD_STATE[p], cityv=$('#'+p+'City').value.trim(), la=$('#'+p+'Lat').value.trim(), lo=$('#'+p+'Lon').value.trim(), tz=$('#'+p+'Tz').value.trim();
+    if(!st.country&&!la&&!lo) throw new Error(lab+'Please choose a country and city (or enter latitude and longitude under Advanced).');
+    if(!la||!lo) throw new Error(lab+(st.country?'Please choose your city from the list, or enter latitude and longitude under Advanced.':'Please enter latitude and longitude under Advanced.'));
+    const lat=Number(la.replace(',','.')), lon=Number(lo.replace(',','.'));
+    if(!isFinite(lat)||lat<-90||lat>90) throw new Error(lab+'Latitude must be a number between -90 and 90.');
+    if(!isFinite(lon)||lon<-180||lon>180) throw new Error(lab+'Longitude must be a number between -180 and 180.');
+    if(!tz) throw new Error(lab+'Please set a time zone under Advanced (e.g. Asia/Kolkata or +5.5).');
+    r.lat=lat;r.lon=lon;r.tz=tz;r.place=[cityv,st.country&&st.country.name].filter(Boolean).join(', ')||(lat+', '+lon);
+  }
+  return r;
+}
+function chartFor(b){
+  const off=tzOffset(b.tz,b.y,b.m,b.d,b.h,b.mi);
+  const utc=Date.UTC(b.y,b.m-1,b.d,b.h,b.mi)-off*3600000;
+  const ch=chartAtJD(utc/86400000+2440587.5,b.lat,b.lon);
+  ch.utc=utc; ch.off=off; return ch;
+}
+const offStr=o=>'UTC'+(o<0?'−':'+')+Math.floor(Math.abs(o))+(Math.abs(o)%1?':'+String(Math.round(Math.abs(o)%1*60)).padStart(2,'0'):'');
+const unkNote=b=>b.unknown?'<p class="note">Birth time was not known, so noon was used. The Lagna and house placements may be approximate; the Moon sign can also shift if you were born near a sign change.</p>':'';
+
+/* ============ ASTROLOGY ============ */
+function planetTable(ch){
+  let r='<div class="tw"><table><tr><th>Planet</th><th>Sign</th><th>Degree</th><th>House</th><th>Nakshatra</th><th>State</th></tr>';
+  r+=`<tr><td><b>Lagna</b></td><td>${SIGNS[ch.lagna]}</td><td>${deg(ch.ascDeg)}</td><td>1</td><td>${NAK[Math.floor(ch.asc/(360/27))]}</td><td></td></tr>`;
+  for(const n of PL){const p=ch.planets[n]; const st=[];
+    if(EXALT[n]===p.sign)st.push('Exalted'); if(DEBIL[n]===p.sign)st.push('Debilitated'); if(OWN[n]&&OWN[n].includes(p.sign))st.push('Own sign'); if(p.retro&&n!=='Rahu'&&n!=='Ketu')st.push('Retrograde');
+    r+=`<tr><td><b>${n}</b></td><td>${SIGNS[p.sign]}</td><td>${deg(p.deg)}</td><td>${p.house}</td><td>${NAK[p.nak]} (${p.pada})</td><td>${st.join(', ')}</td></tr>`}
+  return r+'</table></div>';
+}
+function astroReport(b){
+  const ch=chartFor(b), now=chartAtJD(Date.now()/86400000+2440587.5,0,0), ds=dashas(ch.planets.Moon.lng,ch.utc), nowMs=Date.now();
+  const cur=ds.find(x=>nowMs>=x.start&&nowMs<x.end)||ds[0], an=antars(cur), curA=an.find(x=>nowMs>=x.start&&nowMs<x.end);
+  const av=ashtakavarga(ch), mo=ch.planets.Moon;
+  let h=`<div class="actions noprint"><button class="btn ghost" type="button" id="cleanBtn">Clean reading · print / save PDF</button></div>
+  <div class="card"><h3>${esc(b.name||'Your')} birth chart</h3>
+  <p class="hint">${b.d}/${b.m}/${b.y} · ${String(b.h).padStart(2,'0')}:${String(b.mi).padStart(2,'0')}${b.unknown?' (noon, time unknown)':''} · ${esc(b.place)} · ${offStr(ch.off)}</p>
+  <div class="grid"><div class="stat"><b>${SIGNS[ch.lagna]}</b><span>Lagna (rising sign)</span></div>
+  <div class="stat"><b>${SIGNS[mo.sign]}</b><span>Moon sign (Rashi)</span></div>
+  <div class="stat"><b>${NAK[mo.nak]}</b><span>Birth nakshatra, pada ${mo.pada}</span></div>
+  <div class="stat"><b>${SIGNS[ch.planets.Sun.sign]}</b><span>Sun sign (sidereal)</span></div></div>
+  ${unkNote(b)}
+  <p>Your Lagna is <b>${SIGNS[ch.lagna]}</b>, ruled by ${SLORD[ch.lagna]}, which colours how you meet the world. Your Moon in <b>${SIGNS[mo.sign]}</b> (${NAK[mo.nak]}) describes your inner nature and emotional rhythm. The Sun in ${SIGNS[ch.planets.Sun.sign]} shows where your sense of purpose tends to shine.</p></div>
+  <div class="card"><h3>North Indian chart</h3><div class="chartbox">${northChart(ch)}</div><p class="hint" style="text-align:center">Numbers are zodiac signs (1 = Aries). House 1 is at the top. ᴿ = retrograde.</p></div>
+  <div class="card"><h3>Planets</h3>${planetTable(ch)}</div>
+  <div class="card"><h3>Dasha · life periods</h3>
+  <p>Vimshottari dasha from your Moon's nakshatra. You are in <b>${cur.lord}</b> mahadasha${curA?` with <b>${curA.lord}</b> as the sub-period (until ${fmtDate(curA.end)})`:''}.</p>
+  <div class="tw"><table><tr><th>Mahadasha</th><th>From</th><th>To</th></tr>${ds.map(x=>`<tr class="${x===cur?'now':''}"><td>${x.lord}${x===cur?' · now':''}</td><td>${fmtDate(x.start)}</td><td>${fmtDate(x.end)}</td></tr>`).join('')}</table></div>
+  <h4>Sub-periods inside ${cur.lord}</h4><div class="tw"><table><tr><th>Antardasha</th><th>From</th><th>To</th></tr>${an.map(x=>`<tr class="${x===curA?'now':''}"><td>${x.lord}${x===curA?' · now':''}</td><td>${fmtDate(x.start)}</td><td>${fmtDate(x.end)}</td></tr>`).join('')}</table></div></div>
+  <div class="card"><h3>Ashtakavarga strength</h3><p>Points each sign holds across the seven planets and Lagna (Sarvashtakavarga). Signs above about 28 are comfortably supported; below that, take more care.</p>
+  <div class="tw"><table><tr><th>Sign</th>${SIGNS.map((s,i)=>`<th>${s.slice(0,3)}</th>`).join('')}<th>Total</th></tr>
+  ${Object.keys(av.bav).map(n=>`<tr><td>${n}</td>${av.bav[n].map(v=>`<td>${v}</td>`).join('')}<td>${av.bav[n].reduce((a,c)=>a+c,0)}</td></tr>`).join('')}
+  <tr><td><b>Total</b></td>${av.sav.map(v=>`<td class="${v>=28?'good':'mid'}"><b>${v}</b></td>`).join('')}<td><b>${av.sav.reduce((a,c)=>a+c,0)}</b></td></tr></table></div>
+  <p class="hint">Your Lagna sign (${SIGNS[ch.lagna]}) holds ${av.sav[ch.lagna]} points; your Moon sign holds ${av.sav[mo.sign]}.</p></div>
+  <div class="card"><h3>Period forecasts</h3>${fore(ch,now,b.name)}</div>
+  <div class="card"><h3>Remedies</h3>${remedies(ch)}<p class="note">Remedies are simple habits for reflection and calm — nothing needs to be bought.</p></div>
+  <p class="note">Guidance for reflection only — not a prediction of fate and not medical, legal or financial advice.</p>`;
+  return h;
+}
+
+/* ============ NUMEROLOGY ============ */
+const red=n=>{while(n>9)n=String(n).split('').reduce((a,c)=>a+ +c,0);return n};
+const CH={A:1,B:2,C:3,D:4,E:5,F:8,G:3,H:5,I:1,J:1,K:2,L:3,M:4,N:5,O:7,P:8,Q:1,R:2,S:3,T:4,U:6,V:6,W:6,X:5,Y:1,Z:7};
+const NPLANET={1:'Sun',2:'Moon',3:'Jupiter',4:'Rahu',5:'Mercury',6:'Venus',7:'Ketu',8:'Saturn',9:'Mars'};
+function nameVal(name){
+  const L=name.toUpperCase().replace(/[^A-Z]/g,'').split(''); const sum=L.reduce((a,c)=>a+CH[c],0);
+  return{sum,num:sum?red(sum):0,letters:L.length};
+}
+const FR=['1-2','1-3','1-9','1-5','2-3','2-5','3-5','3-9','4-6','4-8','4-5','5-6','6-8','7-9','7-1','7-3'];
+const EN=['1-8','2-8','2-4','3-6','4-9','6-9'];
+const key=(a,b)=>a<b?a+'-'+b:b+'-'+a;
+function rel(a,b){ if(a===b)return{t:'Same',s:2}; const k=key(a,b); if(FR.includes(k))return{t:'Friendly',s:1.5}; if(EN.includes(k))return{t:'Challenging',s:0}; return{t:'Neutral',s:1}; }
+const KUAD={east:{names:[1,3,4,9],dirs:['South-East (prosperity)','East (health)','South (relationships)','North (growth)'],bad:'West, North-West, South-West, North-East'},
+            west:{names:[2,5,6,7,8],dirs:['North-East (prosperity)','West (joy)','North-West (support)','South-West (stability)'],bad:'East, South-East, South, North'}};
+function kua(y,g){
+  const s=red(String(y).slice(-2).split('').reduce((a,c)=>a+ +c,0)||0)||9;
+  let k = y<2000 ? (g==='m'?10-s:s+5) : (g==='m'?9-s:s+6);
+  k=red(k)||9; k=k>9?red(k):k;
+  if(k===5) k=g==='m'?2:8;
+  return k;
+}
+function numOf(dob){
+  const sum=x=>String(x).split('').reduce((a,c)=>a+ +c,0);
+  return{driver:red(dob.d),conductor:red(sum(dob.d)+sum(dob.m)+sum(dob.y))};
+}
+function numReport(b,gender){
+  const {driver,conductor}=numOf(b), digs=[...(b.d+'').split(''),...(b.m+'').split(''),...(b.y+'').split('')].map(Number);
+  const all=digs.concat([driver,conductor]), cnt={}; all.forEach(x=>cnt[x]=(cnt[x]||0)+1);
+  const grid=[[4,9,2],[3,5,7],[8,1,6]], missing=[1,2,3,4,5,6,7,8,9].filter(n=>!cnt[n]);
+  const k=kua(b.y,gender), grp=[1,3,4,9].includes(k)?KUAD.east:KUAD.west, nv=nameVal(b.name);
+  const NM={1:'leadership and self-belief',2:'sensitivity and cooperation',3:'wisdom and expression',4:'discipline and unconventional thinking',5:'communication and adaptability',6:'love, comfort and responsibility',7:'inner search and detachment',8:'patience, work and fairness',9:'courage and drive'};
+  const MR={1:'Practise speaking up kindly and make small decisions on your own. Sundays suit starting new things.',2:'Spend time near water or the moon, keep a calm sleep routine and nurture a close friendship.',3:'Study something new, respect teachers and share what you know. Thursday is a good day for it.',4:'Keep a simple daily routine and tidy your space; take short breaks from screens.',5:'Read and write regularly; keep promises about communication; avoid scattered multitasking.',6:'Bring beauty and order into your home; spend time with family; be kind to yourself.',7:'Set aside quiet time for reflection or meditation; walk in nature; keep a journal.',8:'Be patient and keep commitments; serve someone who works hard; avoid shortcuts.',9:'Exercise regularly, share your energy with others and take a pause before reacting.'};
+  const nr=nv.num?rel(nv.num,driver):null, nc=nv.num?rel(nv.num,conductor):null;
+  let h=`<div class="card"><h3>${esc(b.name||'Your')} numerology</h3><p class="hint">Born ${b.d}/${b.m}/${b.y}</p>
+  <div class="grid"><div class="stat"><b>${driver}</b><span>Driver (Mulank) · ${NPLANET[driver]}</span></div>
+  <div class="stat"><b>${conductor}</b><span>Conductor (Bhagyank) · ${NPLANET[conductor]}</span></div>
+  <div class="stat"><b>${k}</b><span>Kua number · ${[1,3,4,9].includes(k)?'East':'West'} group</span></div>
+  ${nv.num?`<div class="stat"><b>${nv.num}</b><span>Name number · ${NPLANET[nv.num]}</span></div>`:''}</div>
+  <h4>How it was worked out</h4><ul class="clean">
+  <li>Driver = birth day ${b.d}${b.d>9?' → '+(b.d+'').split('').join(' + ')+' = '+(b.d+'').split('').reduce((a,c)=>a+ +c,0):''} → <b>${driver}</b></li>
+  <li>Conductor = all digits of ${b.d}/${b.m}/${b.y}: ${digs.join(' + ')} = ${digs.reduce((a,c)=>a+c,0)} → <b>${conductor}</b></li></ul>
+  <p><b>Driver ${driver}</b> (${NPLANET[driver]}) is how you naturally behave — themes of ${NM[driver]}. <b>Conductor ${conductor}</b> (${NPLANET[conductor]}) describes the path life tends to lead you along — themes of ${NM[conductor]}. ${rel(driver,conductor).t==='Challenging'?'These two numbers pull in different directions, so balance is a lifelong theme.':rel(driver,conductor).t==='Same'?'Your two numbers match, which can feel like a very focused life path.':'Your two numbers work together reasonably well.'}</p></div>
+  <div class="card"><h3>Lo Shu grid</h3><div class="lo">${grid.flat().map(n=>`<div class="${cnt[n]?'':'miss'}">${cnt[n]?String(n).repeat(cnt[n]):n}</div>`).join('')}</div>
+  <p class="hint">Digits of your birth date plus Driver and Conductor. Faded boxes are missing numbers.</p>
+  <h4>Missing numbers</h4>${missing.length?`<ul class="clean">${missing.map(n=>`<li><b>${n}</b> (${NPLANET[n]}) — ${MR[n]}</li>`).join('')}</ul>`:'<p>No numbers are missing — a well-rounded grid.</p>'}
+  ${Object.keys(cnt).filter(n=>cnt[n]>=3).length?`<p class="note">Repeated three or more times: ${Object.keys(cnt).filter(n=>cnt[n]>=3).map(n=>`${n}×${cnt[n]}`).join(', ')} — that quality can come on strong; balance it with its opposite.</p>`:''}</div>
+  <div class="card"><h3>Kua number &amp; lucky directions</h3><p>Kua <b>${k}</b> (${gender==='m'?'male':'female'}, ${[1,3,4,9].includes(k)?'East':'West'} group).</p>
+  <ul class="clean">${grp.dirs.map(x=>`<li class="good">${x}</li>`).join('')}</ul><p class="hint">Directions to be careful with: ${grp.bad}. Use them gently when choosing where to sit, sleep or work.</p></div>`;
+  if(nv.num) h+=`<div class="card"><h3>Name check · Chaldean</h3><p>“${esc(b.name)}” → ${nv.letters} letters, total <b>${nv.sum}</b> → <b>${nv.num}</b> (${NPLANET[nv.num]}).</p>
+  <p>Against your Driver ${driver}: <b>${nr.t}</b>. Against your Conductor ${conductor}: <b>${nc.t}</b>.</p>
+  <p class="note">${nr.s+nc.s>=2.5?'Your name vibrates in harmony with your birth numbers. Nothing needs changing.':'If you ever wish, a small spelling variation that gives a total friendlier to your Driver and Conductor is traditionally suggested. This is entirely optional — your name is your own.'}</p></div>`;
+  else h+=`<div class="card"><h3>Name check</h3><p>Add your full name to see its Chaldean value.</p></div>`;
+  return h+'<p class="note">Guidance for reflection only.</p>';
+}
+
+/* ============ MATCH · ASTROLOGY ============ */
+const GANA=[0,1,2,1,0,1,0,0,2,2,1,1,0,2,0,2,0,2,2,1,1,0,2,2,1,1,0]; // 0 deva 1 manushya 2 rakshasa
+const GN=['Deva','Manushya','Rakshasa'];
+const NADI=[0,1,2,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,0,1,2], NDN=['Adi','Madhya','Antya'];
+const YONI=['Horse','Elephant','Sheep','Serpent','Serpent','Dog','Cat','Sheep','Cat','Rat','Rat','Cow','Buffalo','Tiger','Buffalo','Tiger','Deer','Deer','Dog','Monkey','Mongoose','Monkey','Lion','Horse','Lion','Cow','Elephant'];
+const YEN=[['Cow','Tiger'],['Elephant','Lion'],['Horse','Buffalo'],['Dog','Deer'],['Serpent','Mongoose'],['Monkey','Sheep'],['Cat','Rat']];
+const VARNA=[2,1,0,3,2,1,0,3,2,1,0,3]; // 3 brahmin..
+const VASHYA=['Chatushpada','Chatushpada','Manav','Jalchar','Vanchar','Manav','Manav','Keet','Manav','Chatushpada','Manav','Jalchar'];
+const FRI={Sun:{f:['Moon','Mars','Jupiter'],e:['Venus','Saturn']},Moon:{f:['Sun','Mercury'],e:[]},Mars:{f:['Sun','Moon','Jupiter'],e:['Mercury']},Mercury:{f:['Sun','Venus'],e:['Moon']},Jupiter:{f:['Sun','Moon','Mars'],e:['Mercury','Venus']},Venus:{f:['Mercury','Saturn'],e:['Sun','Moon']},Saturn:{f:['Mercury','Venus'],e:['Sun','Moon','Mars']}};
+const rl=(a,b)=>FRI[a].f.includes(b)?2:FRI[a].e.includes(b)?0:1;
+function gunaMilan(g,bo){ // g girl chart, bo boy chart
+  const gm=g.planets.Moon, bm=bo.planets.Moon, K=[];
+  const vb=VARNA[bm.sign], vg=VARNA[gm.sign];
+  K.push(['Varna',1,vb>=vg?1:0,`Boy ${['Shudra','Vaishya','Kshatriya','Brahmin'][vb]}, girl ${['Shudra','Vaishya','Kshatriya','Brahmin'][vg]}`]);
+  const a=VASHYA[bm.sign],c=VASHYA[gm.sign];
+  K.push(['Vashya',2,a===c?2:(a==='Vanchar'||a==='Keet'||c==='Vanchar'||c==='Keet')?0:1,`${a} / ${c} (simplified scoring)`]);
+  const t1=((bm.nak-gm.nak+27)%27+1)%9, t2=((gm.nak-bm.nak+27)%27+1)%9, bad=[3,5,7], tb=(bad.includes(t1)?0:1)+(bad.includes(t2)?0:1);
+  K.push(['Tara',3,tb*1.5,`Remainders ${t1}, ${t2}`]);
+  const y1=YONI[bm.nak],y2=YONI[gm.nak], en=YEN.some(p=>(p[0]===y1&&p[1]===y2)||(p[1]===y1&&p[0]===y2));
+  K.push(['Yoni',4,y1===y2?4:en?0:2,`${y1} / ${y2}${en?' (natural enemies)':''} (simplified scoring)`]);
+  const l1=SLORD[bm.sign],l2=SLORD[gm.sign]; let gmv;
+  if(l1===l2) gmv=5; else {const s=rl(l1,l2)+rl(l2,l1); gmv=({4:5,3:4,2:3,1:0.5,0:0})[s]; if(s===2&&(rl(l1,l2)===2||rl(l2,l1)===2)) gmv=1;}
+  K.push(['Graha Maitri',5,gmv,`Moon-sign lords ${l1} / ${l2}`]);
+  const g1=GANA[bm.nak],g2=GANA[gm.nak]; let gs; if(g1===g2)gs=6; else if(g1+g2===1)gs=5; else if(g1+g2===2)gs=1; else gs=0;
+  K.push(['Gana',6,gs,`${GN[g1]} / ${GN[g2]}`]);
+  const dist=((gm.sign-bm.sign+12)%12)+1, bk=[2,12,5,9,6,8].includes(dist)&&[2,12,5,9,6,8].includes(((bm.sign-gm.sign+12)%12)+1);
+  K.push(['Bhakoot',7,bk?0:7,`Moon signs ${SIGNS[bm.sign]} / ${SIGNS[gm.sign]}${bk?' — dosha':''}`]);
+  const n1=NADI[bm.nak],n2=NADI[gm.nak];
+  K.push(['Nadi',8,n1===n2?0:8,`${NDN[n1]} / ${NDN[n2]}${n1===n2?' — dosha':''}`]);
+  return K;
+}
+const mangal=ch=>{const m=ch.planets.Mars, fromL=m.house, fromM=((m.sign-ch.planets.Moon.sign+12)%12)+1, bad=[1,2,4,7,8,12];
+  return{l:bad.includes(fromL),m:bad.includes(fromM),fromL,fromM}};
+function matchAReport(B,G){
+  const cb=chartFor(B), cg=chartFor(G), K=gunaMilan(cg,cb), tot=K.reduce((a,k)=>a+k[2],0);
+  const mb=mangal(cb), mg=mangal(cg), nadi=K[7][2]===0, bh=K[6][2]===0;
+  const verdict=tot>=28?['Excellent harmony','good']:tot>=21?['Good compatibility','good']:tot>=18?['Acceptable — worth some conversation','mid']:['Needs care and open conversation','bad'];
+  const md=x=>(x.l||x.m)?'present':'not present';
+  const both=(mb.l||mb.m)&&(mg.l||mg.m), one=((mb.l||mb.m)!==(mg.l||mg.m));
+  return`<div class="card"><h3>Guna Milan · ${tot%1?tot.toFixed(1):tot} / 36</h3>
+  <div class="big ${verdict[1]}">${tot%1?tot.toFixed(1):tot}<span style="font-size:24px;color:var(--mute)"> / 36</span></div><div class="bar"><i style="width:${tot/36*100}%"></i></div>
+  <p><b class="${verdict[1]}">${verdict[0]}.</b> ${esc(B.name||'Boy')} (Moon in ${SIGNS[cb.planets.Moon.sign]}, ${NAK[cb.planets.Moon.nak]}) and ${esc(G.name||'Girl')} (Moon in ${SIGNS[cg.planets.Moon.sign]}, ${NAK[cg.planets.Moon.nak]}).</p>
+  <div class="tw"><table><tr><th>Koota</th><th>Points</th><th>Max</th><th>Detail</th></tr>${K.map(k=>`<tr><td>${k[0]}</td><td class="${k[2]===k[1]?'good':k[2]===0?'bad':'mid'}"><b>${k[2]}</b></td><td>${k[1]}</td><td>${esc(k[3])}</td></tr>`).join('')}
+  <tr><td><b>Total</b></td><td><b>${tot}</b></td><td>36</td><td></td></tr></table></div></div>
+  <div class="card"><h3>Key checks</h3><ul class="clean">
+  <li><b>Nadi</b>: ${nadi?'<span class="bad">same Nadi — traditionally a caution (health/children themes); many families look at remedies or other factors</span>':'<span class="good">different Nadi — no dosha</span>'}</li>
+  <li><b>Bhakoot</b>: ${bh?'<span class="bad">dosha present — traditionally linked with emotional or financial friction</span>':'<span class="good">no dosha</span>'}</li>
+  <li><b>Mangal dosha</b>: boy ${md(mb)}, girl ${md(mg)} (Mars in 1/2/4/7/8/12 from Lagna or Moon). ${both?'<span class="good">Both have it, which traditionally balances.</span>':one?'<span class="mid">Only one has it — often discussed with an astrologer.</span>':'<span class="good">Neither has it.</span>'}</li></ul>
+  ${B.unknown||G.unknown?'<p class="note">One birth time was unknown, so Mangal dosha (which depends on Lagna) may be approximate. Guna Milan itself uses only the Moon.</p>':''}
+  <p class="note">The score is guidance, not a verdict on the couple. Respect, communication, shared values and effort matter far more than any number. Yoni and Vashya scoring here is simplified.</p></div>`;
+}
+
+/* ============ MATCH · NUMEROLOGY ============ */
+function matchNReport(A,Bp){
+  const mk=x=>{const n=numOf(x),v=nameVal(x.name);return{...x,...n,nm:v.num,sum:v.sum}};
+  const a=mk(A),b=mk(Bp);
+  const pairs=[['Driver ↔ Driver',a.driver,b.driver,3],['Conductor ↔ Conductor',a.conductor,b.conductor,3],['Driver ↔ Conductor',a.driver,b.conductor,2],['Conductor ↔ Driver',a.conductor,b.driver,2]];
+  if(a.nm&&b.nm) pairs.push(['Name ↔ Name',a.nm,b.nm,2]);
+  let got=0,max=0; const rows=pairs.map(p=>{const r=rel(p[1],p[2]);const pts=r.s/2*p[3];got+=pts;max+=p[3];return`<tr><td>${p[0]}</td><td>${p[1]} (${NPLANET[p[1]]}) / ${p[2]} (${NPLANET[p[2]]})</td><td class="${r.s>=1.5?'good':r.s===0?'bad':'mid'}">${r.t}</td><td>${pts}/${p[3]}</td></tr>`}).join('');
+  const pct=Math.round(got/max*100), v=pct>=75?['Naturally harmonious','good']:pct>=50?['Workable, with understanding','mid']:['Different rhythms — patience helps','bad'];
+  const show=x=>`<div class="stat"><b>${x.driver} · ${x.conductor}</b><span>${esc(x.name||'—')}: Driver · Conductor${x.nm?' · Name '+x.nm:''}</span></div>`;
+  return`<div class="card"><h3>Number match · ${pct}%</h3><div class="bar"><i style="width:${pct}%"></i></div><p><b class="${v[1]}">${v[0]}.</b></p>
+  <div class="grid">${show(a)}${show(b)}</div>
+  <h4>How each figure was calculated</h4><ul class="clean">
+  <li>${esc(A.name||'Person 1')}: Driver = day ${A.d} → ${a.driver}; Conductor = digits of ${A.d}/${A.m}/${A.y} → ${a.conductor}${a.nm?`; name total ${a.sum} → ${a.nm}`:''}</li>
+  <li>${esc(Bp.name||'Person 2')}: Driver = day ${Bp.d} → ${b.driver}; Conductor = digits of ${Bp.d}/${Bp.m}/${Bp.y} → ${b.conductor}${b.nm?`; name total ${b.sum} → ${b.nm}`:''}</li></ul>
+  <div class="tw"><table><tr><th>Comparison</th><th>Numbers</th><th>Relation</th><th>Points</th></tr>${rows}</table></div>
+  <p class="note">Same = full points, friendly = three-quarters, neutral = half, challenging = none. Schools of numerology differ on friendships, so treat this as a conversation starter, not a verdict.</p></div>`;
+}
+
+/* ============ LAL KITAB ============ */
+const PAKKA={Sun:[1],Moon:[4],Mars:[3,8],Mercury:[7],Jupiter:[2,5,9,12],Venus:[7],Saturn:[10,11],Rahu:[12],Ketu:[6]};
+const UPAY={
+ Sun:'For 43 days, offer water to the rising sun and feed jaggery or wheat to a cow. Serve your father or elders.',
+ Moon:'For 43 days, serve your mother or an elder woman and offer a little milk or water to a flowing stream or a tree\'s roots.',
+ Mars:'For 43 days, share sweets (such as jaggery or revri) with others and feed birds or monkeys. Keep anger in check.',
+ Mercury:'For 43 days, feed green fodder to a cow and drop a small coin in flowing water. Speak softly and truthfully.',
+ Jupiter:'For 43 days, serve a teacher or elder, and offer chana dal or yellow food at a temple or to a cow.',
+ Venus:'For 43 days, feed a cow a fresh roti first thing, keep the home clean and honour the women of the house.',
+ Saturn:'For 43 days, feed a dog (black if possible) or crows, and serve a labourer or helper kindly — especially on Saturdays.',
+ Rahu:'For 43 days, float a handful of barley or a coconut in flowing water and keep the kitchen and bathroom clean.',
+ Ketu:'For 43 days, feed a dog daily and offer a little food to a hungry person. Treat visiting guests kindly.'
+};
+function lalReport(b){
+  const ch=chartFor(b), pl=ch.planets, occ={}; PL.forEach(n=>{(occ[pl[n].house]=occ[pl[n].house]||[]).push(n)});
+  const has=(n,hs)=>hs.includes(pl[n].house);
+  const rin=[];
+  if(['Venus','Mercury','Rahu'].some(n=>has(n,[2,5,9,12]))) rin.push(['Pitri rin (ancestral debt)','Venus, Mercury or Rahu sits in the 2nd, 5th, 9th or 12th house.','Serve elders and honour ancestors; offer food to a cow on amavasya.']);
+  if(has('Ketu',[4])) rin.push(['Matri rin (mother\'s debt)','Ketu sits in the 4th house.','Serve your mother and elder women; keep the home\'s water vessels clean.']);
+  if(['Sun','Rahu','Ketu'].some(n=>has(n,[2,7]))) rin.push(['Stri rin (debt to women)','Sun, Rahu or Ketu sits in the 2nd or 7th house.','Respect and support the women in your life; avoid hurting a woman\'s feelings.']);
+  if(has('Mercury',[1,3])) rin.push(['Bhai / sibling rin','Mercury sits in the 1st or 3rd house.','Keep faith with siblings and cousins; share what you have.']);
+  if(has('Moon',[3,6])) rin.push(['Behen / beti rin (sisters & daughters)','Moon sits in the 3rd or 6th house.','Look after sisters and daughters; give gifts without being asked.']);
+  const sleeping=[];
+  for(let h=1;h<=12;h++){ const op=((h+5)%12)+1; if(!(occ[h]||[]).length&&!(occ[op]||[]).length) sleeping.push(h) }
+  const unwell=PL.filter(n=>!PAKKA[n].includes(pl[n].house)&&[6,8,12].includes(pl[n].house));
+  let h=`<div class="card"><h3>${esc(b.name||'Your')} Lal Kitab chart</h3><p class="hint">${b.d}/${b.m}/${b.y} · ${esc(b.place)} · Lagna ${SIGNS[ch.lagna]}</p>${unkNote(b)}
+  <div class="chartbox">${northChart(ch)}</div>
+  <p class="hint" style="text-align:center">Houses counted from the Lagna. Planets sit in the house shown by their sign.</p></div>
+  <div class="card"><h3>Planets in houses · pakka ghar</h3>
+  <div class="tw"><table><tr><th>Planet</th><th>House</th><th>Pakka ghar</th><th>Reading</th></tr>
+  ${PL.map(n=>{const ok=PAKKA[n].includes(pl[n].house);return`<tr><td><b>${n}</b></td><td>${pl[n].house}</td><td>${PAKKA[n].join(', ')}</td><td class="${ok?'good':[6,8,12].includes(pl[n].house)?'bad':'mid'}">${ok?'In its own fixed house — steady and strong':[6,8,12].includes(pl[n].house)?'In a testing house — benefits from upay':'Outside its fixed house — results come with effort'}</td></tr>`}).join('')}</table></div></div>
+  <div class="card"><h3>Rin (family debt) checks</h3>${rin.length?`<ul class="clean">${rin.map(r=>`<li><b>${r[0]}</b> — ${r[1]}<br><span class="hint">${r[2]}</span></li>`).join('')}</ul>`:'<p class="good">None of the common rin indications are present in your chart.</p>'}
+  <h4>Sleeping houses</h4><p>${sleeping.length?`Houses ${sleeping.join(', ')} are empty and have no planet in the house opposite — Lal Kitab calls these “sleeping” (soye hue), meaning the matters of that house stay quiet until you actively nurture them.`:'No sleeping houses — every house is either occupied or faces an occupied house.'}</p>
+  <p class="hint">Simplified checks based on common Lal Kitab teachings; traditions vary.</p></div>
+  <div class="card"><h3>Upay · simple household remedies</h3>
+  <p>Lal Kitab remedies are small, humble acts done for <b>43 days without a break</b> — feeding, serving, or offering to flowing water. No gemstones or expensive items are needed.</p>
+  <ul class="clean">${(unwell.length?unwell:[PL[1]].map(()=>SLORD[ch.lagna])).map(n=>`<li><b>${n}</b> — ${UPAY[n]}</li>`).join('')}</ul>
+  ${rin.length?`<p>For the rin above, begin with the ${unwell.length?'planet remedies and the':''} service-based acts listed under each rin.</p>`:''}
+  <p class="note">If you miss a day, start the count again. Do the upay quietly, without announcing it. Guidance for reflection only.</p></div>`;
+  return h;
+}
+
+/* ============ wiring ============ */
+function showErr(id,msg){const e=$(id);e.textContent=msg;e.hidden=false;e.scrollIntoView({behavior:'smooth',block:'nearest'})}
+function wireForm(form,errId,resId,fn){
+  $(form).addEventListener('submit',ev=>{
+    ev.preventDefault();
+    const err=$(errId), res=$(resId); err.hidden=true;
+    try{
+      const html=fn();
+      ['#astroResults','#numResults','#matchAResults','#matchNResults','#lalResults'].forEach(r=>{if(r!==resId)$(r).hidden=true});
+      res.innerHTML=html; res.hidden=false;
+      res.scrollIntoView({behavior:'smooth',block:'start'});
+      const cb=res.querySelector('#cleanBtn'); if(cb) cb.onclick=()=>{document.body.classList.add('clean');window.print();setTimeout(()=>document.body.classList.remove('clean'),500)};
+    }catch(e){ console.error(e); res.hidden=true; showErr(errId,e.message||'Something went wrong. Please check your details and try again.') }
+  });
+}
+mountBirth('#astroFields','a');
+mountBirth('#numFields','n',{time:false,place:false});
+mountBirth('#bFields','b'); mountBirth('#gFields','g');
+mountBirth('#pFields','p',{time:false,place:false}); mountBirth('#qFields','q',{time:false,place:false});
+mountBirth('#lalFields','l');
+$('#countryList')||document.body.insertAdjacentHTML('beforeend',`<datalist id="countryList">${COUNTRIES.map(c=>`<option value="${esc(c.name)}">`).join('')}</datalist>`);
+
+wireForm('#astroForm','#astroErr','#astroResults',()=>astroReport(readBirth('a')));
+wireForm('#numForm','#numErr','#numResults',()=>{
+  const b=readBirth('n',{time:false,place:false}), g=$('#nGender').value;
+  if(!g) throw new Error('Please select a gender — it is only used for the Kua number.');
+  return numReport(b,g)});
+wireForm('#matchAForm','#matchAErr','#matchAResults',()=>matchAReport(readBirth('b',{label:'Boy'}),readBirth('g',{label:'Girl'})));
+wireForm('#matchNForm','#matchNErr','#matchNResults',()=>{
+  const a=readBirth('p',{time:false,place:false,label:'Person 1'}), b=readBirth('q',{time:false,place:false,label:'Person 2'});
+  return matchNReport(a,b)});
+wireForm('#lalForm','#lalErr','#lalResults',()=>lalReport(readBirth('l')));
+
+/* tabs */
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===t));
+  document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!=='p-'+t.dataset.t);
+  const map={astro:'#astroResults',num:'#numResults',matchA:'#matchAResults',matchN:'#matchNResults',lal:'#lalResults'};
+  Object.values(map).forEach(r=>$(r).hidden=true);
+}));
+
+/* ============ night sky ============ */
+(function(){
+  const cv=$('#sky'), cx=cv.getContext('2d'), still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let W,H,stars=[];
+  const PLN=[{r:.16,s:.0021,c:'#c9b79a',z:2},{r:.24,s:.0016,c:'#e8d9a8',z:3},{r:.33,s:.0012,c:'#7fb4c9',z:3.4},{r:.43,s:.0009,c:'#d98a6a',z:3},{r:.58,s:.0005,c:'#d4b06a',z:5},{r:.72,s:.0003,c:'#b9a47a',z:4.2}].map(p=>({...p,a:Math.random()*6.28}));
+  function size(){const dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);
+    stars=Array.from({length:Math.round(W*H/5200)},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.2,p:Math.random()*6.28,s:.4+Math.random()*1.2}))}
+  function draw(t){
+    const g=cx.createRadialGradient(W*.5,H*.35,0,W*.5,H*.35,Math.max(W,H)*.8);g.addColorStop(0,'#0f1938');g.addColorStop(1,'#050813');
+    cx.fillStyle=g;cx.fillRect(0,0,W,H);
+    for(const s of stars){cx.globalAlpha=.35+.45*Math.sin(t/1000*s.s+s.p)**2;cx.fillStyle='#dfe8ff';cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.283);cx.fill()}
+    cx.globalAlpha=1;
+    const ox=W*.5,oy=H*.42,sc=Math.max(W,H)*.62;
+    cx.lineWidth=1;
+    for(const p of PLN){
+      cx.strokeStyle='rgba(160,190,220,.07)';cx.beginPath();cx.ellipse(ox,oy,p.r*sc,p.r*sc*.32,-.18,0,6.283);cx.stroke();
+      const a=p.a+t*p.s*.1, x=ox+Math.cos(a)*p.r*sc, y=oy+Math.sin(a)*p.r*sc*.32;
+      const rot=-.18, rx=ox+(x-ox)*Math.cos(rot)-(y-oy)*Math.sin(rot), ry=oy+(x-ox)*Math.sin(rot)+(y-oy)*Math.cos(rot);
+      const gl=cx.createRadialGradient(rx,ry,0,rx,ry,p.z*4);gl.addColorStop(0,p.c+'88');gl.addColorStop(1,'transparent');
+      cx.fillStyle=gl;cx.beginPath();cx.arc(rx,ry,p.z*4,0,6.283);cx.fill();
+      cx.fillStyle=p.c;cx.globalAlpha=.85;cx.beginPath();cx.arc(rx,ry,p.z,0,6.283);cx.fill();cx.globalAlpha=1;
+    }
+    if(!still) requestAnimationFrame(draw);
+  }
+  addEventListener('resize',()=>{size();if(still)draw(0)});size();requestAnimationFrame(draw);
+})();
+window.addEventListener('error',e=>console.error('Ankho Ka Math error:',e.message));
+</script>
+</body>
+</html>
