@@ -22,8 +22,8 @@ nav a:hover{color:var(--teal)}
 .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);opacity:.9;margin-bottom:22px;display:flex;align-items:center;gap:14px}
 .eyebrow:before,.eyebrow:after{content:"";width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--teal))}
 .eyebrow:after{transform:scaleX(-1)}
-.hero h1{font:600 clamp(54px,12vw,120px)/.95 'Cormorant Garamond',serif;margin:0;color:var(--text);letter-spacing:.01em;text-shadow:0 0 60px rgba(95,209,196,.25)}
-.hero h1 span{display:block;background:linear-gradient(100deg,#b8923f,#f1d99a 50%,#c9a45a);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
+.hero h1{font:600 clamp(34px,calc((100vw - 32px)/6.4),120px)/1 'Cormorant Garamond',serif;white-space:nowrap;margin:0;color:var(--text);letter-spacing:.01em;text-shadow:0 0 60px rgba(95,209,196,.25)}
+.hero h1 span{display:inline;background:linear-gradient(100deg,#b8923f,#f1d99a 50%,#c9a45a);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
 .hero{position:relative;overflow:visible}
 .wheel{position:absolute;left:50%;top:46%;width:min(760px,150vw);aspect-ratio:1;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;opacity:.55;-webkit-mask-image:radial-gradient(circle,#000 45%,transparent 72%);mask-image:radial-gradient(circle,#000 45%,transparent 72%)}
 .wheel svg{width:100%;height:100%;animation:spin 320s linear infinite}
