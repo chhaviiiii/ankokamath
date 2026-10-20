@@ -47,8 +47,7 @@ input:focus,select:focus{outline:2px solid var(--teal);outline-offset:0}
 .hint{font-size:12px;color:var(--mute);margin-top:4px}
 .combo{display:flex;gap:8px;align-items:stretch}
 .combo input[type=text]{flex:1}
-.pick{position:relative;width:48px;min-height:48px;border:1px solid var(--line);border-radius:10px;background:rgba(5,9,24,.7);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;flex:none}
-.pick input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.pick{position:relative;color:var(--text);padding:0;width:48px;min-height:48px;border:1px solid var(--line);border-radius:10px;background:rgba(5,9,24,.7);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;flex:none}
 .chk{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:14px;color:var(--text);min-height:40px}
 .chk input{width:22px;height:22px;accent-color:var(--teal)}
 details.adv{margin:4px 0 14px;border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
@@ -85,6 +84,32 @@ ul.clean li{margin:4px 0}
 .actions{display:flex;gap:10px;justify-content:flex-end;margin-bottom:12px}
 footer{position:relative;z-index:1;text-align:center;padding:36px 16px 48px;color:var(--mute);font-size:13px;max-width:760px;margin:0 auto}
 footer a{color:var(--teal)}
+.cb{position:relative}
+.dd{position:absolute;left:0;right:0;z-index:30;margin:4px 0 0;padding:6px;list-style:none;background:#0c1330;border:1px solid var(--teal);border-radius:12px;max-height:270px;overflow:auto;box-shadow:0 18px 40px rgba(0,0,0,.55)}
+.dd[hidden]{display:none}
+.dd li{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:11px 12px;border-radius:8px;cursor:pointer;min-height:44px}
+.dd li small{color:var(--mute);font-size:12px;white-space:nowrap}
+.dd li.on,.dd li:hover{background:rgba(95,209,196,.16)}
+.dd li.custom{color:var(--gold)}.dd li.empty{color:var(--mute);cursor:default}
+.dd mark{background:none;color:var(--teal);font-weight:600}
+.pop{position:absolute;left:0;z-index:30;top:100%;margin-top:-6px;width:min(320px,100%);background:#0c1330;border:1px solid var(--teal);border-radius:16px;padding:14px;box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.pop .hd{display:flex;gap:6px;align-items:center;margin-bottom:10px}
+.pop select{min-height:42px;padding:8px 10px;font-size:14px;flex:1}
+.pop .nv{width:42px;min-height:42px;border-radius:10px;border:1px solid var(--line);background:rgba(5,9,24,.7);color:var(--teal);font-size:20px;cursor:pointer}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center}
+.cal span{font-size:11px;color:var(--mute);padding:4px 0}
+.cal button{aspect-ratio:1;min-height:38px;border:0;border-radius:50%;background:transparent;color:var(--text);font:400 14px Sora,sans-serif;cursor:pointer}
+.cal button:hover{background:rgba(95,209,196,.18)}
+.cal button.sel{background:var(--teal);color:#04201d;font-weight:600}
+.cal button.today{outline:1px solid var(--gold)}
+.tcols{display:grid;grid-template-columns:1fr 1fr 70px;gap:8px}
+.tcol{max-height:210px;overflow:auto;display:flex;flex-direction:column;gap:3px;padding-right:2px}
+.tcol b{position:sticky;top:0;background:#0c1330;font-size:11px;color:var(--mute);font-weight:500;padding:2px 0 4px;text-transform:uppercase;letter-spacing:.06em}
+.tcol button{min-height:40px;border:0;border-radius:8px;background:transparent;color:var(--text);font:400 15px Sora,sans-serif;cursor:pointer}
+.tcol button:hover{background:rgba(95,209,196,.18)}
+.tcol button.sel{background:var(--teal);color:#04201d;font-weight:600}
+.pop .done{width:100%;margin-top:10px;min-height:42px;padding:8px}
+.pick:disabled{opacity:.4;cursor:not-allowed}
 @media(max-width:560px){nav a{margin-left:12px;font-size:13px}.panel{padding:16px}}
 @media print{
  body{background:#fff;color:#000}#sky,header.top,.hero,.tabs,.panel,footer,.actions,.noprint{display:none!important}
@@ -585,13 +610,13 @@ const FIELD_STATE={};
 function birthBlock(p,o){
   o=o||{}; const time=o.time!==false, place=o.place!==false;
   let h=`<div class="f"><label for="${p}Name">Full name</label><input type="text" class="txt" id="${p}Name" autocomplete="name" placeholder="Your full name"></div>
-  <div class="f"><label for="${p}Dob">Date of birth</label><div class="combo"><input type="text" id="${p}Dob" inputmode="numeric" autocomplete="off" placeholder="DD/MM/YYYY" maxlength="10"><label class="pick" title="Pick a date">📅<input type="date" id="${p}DobPick" min="1800-01-01" max="2100-12-31" aria-label="Pick date of birth"></label></div><div class="hint">e.g. 15/08/1990</div></div>`;
-  if(time) h+=`<div class="f"><label for="${p}Tob">Time of birth</label><div class="combo"><input type="text" id="${p}Tob" autocomplete="off" placeholder="14:30 or 2:30 PM" maxlength="10"><label class="pick" title="Pick a time">🕑<input type="time" id="${p}TobPick" aria-label="Pick time of birth"></label></div>
+  <div class="f" style="position:relative"><label for="${p}Dob">Date of birth</label><div class="combo"><input type="text" id="${p}Dob" inputmode="numeric" autocomplete="off" placeholder="DD/MM/YYYY" maxlength="10"><button type="button" class="pick" id="${p}DobBtn" title="Pick a date" aria-label="Open calendar">📅</button></div><div class="hint">e.g. 15/08/1990</div></div>`;
+  if(time) h+=`<div class="f" style="position:relative"><label for="${p}Tob">Time of birth</label><div class="combo"><input type="text" id="${p}Tob" autocomplete="off" placeholder="14:30 or 2:30 PM" maxlength="10"><button type="button" class="pick" id="${p}TobBtn" title="Pick a time" aria-label="Open time picker">🕑</button></div>
   <div class="hint">e.g. 14:30 or 2:30 PM</div>
   <label class="chk"><input type="checkbox" id="${p}Unk"> Birth time unknown</label>
   <div class="hint" id="${p}UnkNote" hidden>We'll use 12:00 noon. Your Lagna (rising sign) and house placements may be approximate.</div></div>`;
-  if(place) h+=`<div class="f"><label for="${p}Country">Country</label><input type="text" id="${p}Country" list="countryList" autocomplete="off" placeholder="Type to search countries"></div>
-  <div class="f"><label for="${p}City">City / town</label><input type="text" id="${p}City" list="${p}Cities" autocomplete="off" placeholder="Start typing your city"><datalist id="${p}Cities"></datalist>
+  if(place) h+=`<div class="f"><label for="${p}Country">Country</label><div class="cb"><input type="text" id="${p}Country" autocomplete="off" role="combobox" aria-autocomplete="list" placeholder="Search countries…"></div></div>
+  <div class="f"><label for="${p}City">City / town</label><div class="cb"><input type="text" id="${p}City" autocomplete="off" role="combobox" aria-autocomplete="list" placeholder="Search your city…"></div>
   <div class="hint">Pick country, then city — coordinates and timezone fill automatically. If your town isn't listed, choose the nearest city or enter coordinates under Advanced.</div><div class="hint good" id="${p}LocNote"></div></div>
   <details class="adv" id="${p}Adv"><summary>Advanced: coordinates &amp; time zone</summary><div class="row3">
   <div class="f"><label for="${p}Lat">Latitude</label><input type="text" id="${p}Lat" inputmode="decimal" placeholder="28.6139"></div>
@@ -599,30 +624,95 @@ function birthBlock(p,o){
   <div class="f"><label for="${p}Tz">Time zone</label><input type="text" id="${p}Tz" placeholder="Asia/Kolkata or +5.5"><div class="hint">Use a name such as Asia/Kolkata (daylight saving is handled), or a UTC offset like +5.5.</div></div></div></details>`;
   return h;
 }
+/* ---- custom pickers ---- */
+let openPop=null;
+const closePop=()=>{if(openPop){openPop.remove();openPop=null}};
+document.addEventListener('mousedown',e=>{if(openPop&&!openPop.contains(e.target)&&!e.target.closest('.pick'))closePop()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePop()});
+const fire=el=>{el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))};
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function mkPop(btn,html){closePop();const pop=document.createElement('div');pop.className='pop';pop.innerHTML=html;btn.closest('.f').appendChild(pop);openPop=pop;return pop}
 function wireDate(p){
-  const t=$('#'+p+'Dob'), pk=$('#'+p+'DobPick');
-  t.addEventListener('input',()=>{const d=t.value.replace(/\D/g,'').slice(0,8);let o=d.slice(0,2);if(d.length>2)o+='/'+d.slice(2,4);if(d.length>4)o+='/'+d.slice(4,8);t.value=o;
-    const m=o.match(/^(\d\d)\/(\d\d)\/(\d{4})$/);if(m)pk.value=`${m[3]}-${m[2]}-${m[1]}`});
-  pk.addEventListener('change',()=>{const m=pk.value.match(/^(\d{4})-(\d\d)-(\d\d)$/);if(m)t.value=`${m[3]}/${m[2]}/${m[1]}`});
-  pk.addEventListener('click',()=>{try{pk.showPicker&&pk.showPicker()}catch(e){}});
+  const t=$('#'+p+'Dob'), btn=$('#'+p+'DobBtn');
+  t.addEventListener('input',()=>{const d=t.value.replace(/\D/g,'').slice(0,8);let o=d.slice(0,2);if(d.length>2)o+='/'+d.slice(2,4);if(d.length>4)o+='/'+d.slice(4,8);t.value=o});
+  btn.addEventListener('click',()=>{
+    if(openPop&&openPop.parentNode===btn.closest('.f')){closePop();return}
+    const m=t.value.match(/^(\d\d)\/(\d\d)\/(\d{4})$/), now=new Date();
+    let sel=m?{d:+m[1],m:+m[2]-1,y:+m[3]}:null, vy=sel?sel.y:1990, vm=sel?sel.m:0;
+    const pop=mkPop(btn,'');
+    const draw=()=>{
+      const first=new Date(Date.UTC(vy,vm,1)).getUTCDay(), n=new Date(Date.UTC(vy,vm+1,0)).getUTCDate();
+      let yrs='';for(let y=2100;y>=1800;y--)yrs+=`<option${y===vy?' selected':''}>${y}</option>`;
+      let h=`<div class="hd"><button type="button" class="nv" data-s="-1" aria-label="Previous month">‹</button><select class="sm" aria-label="Month">${MONTHS.map((x,i)=>`<option value="${i}"${i===vm?' selected':''}>${x}</option>`).join('')}</select><select class="sy" aria-label="Year">${yrs}</select><button type="button" class="nv" data-s="1" aria-label="Next month">›</button></div><div class="cal">`;
+      'SMTWTFS'.split('').forEach(x=>h+=`<span>${x}</span>`);
+      for(let i=0;i<first;i++)h+='<span></span>';
+      for(let d=1;d<=n;d++){const isSel=sel&&sel.d===d&&sel.m===vm&&sel.y===vy, isTd=now.getDate()===d&&now.getMonth()===vm&&now.getFullYear()===vy;
+        h+=`<button type="button" data-d="${d}" class="${isSel?'sel':''} ${isTd?'today':''}">${d}</button>`}
+      pop.innerHTML=h+'</div>';
+      pop.querySelector('.sm').onchange=e=>{vm=+e.target.value;draw()};
+      pop.querySelector('.sy').onchange=e=>{vy=+e.target.value;draw()};
+      pop.querySelectorAll('.nv').forEach(b=>b.onclick=()=>{vm+=+b.dataset.s;if(vm<0){vm=11;vy--}if(vm>11){vm=0;vy++}vy=Math.min(2100,Math.max(1800,vy));draw()});
+      pop.querySelectorAll('.cal button').forEach(b=>b.onclick=()=>{const d=+b.dataset.d;t.value=String(d).padStart(2,'0')+'/'+String(vm+1).padStart(2,'0')+'/'+vy;fire(t);closePop();t.focus()});
+    };
+    draw();
+  });
 }
 function wireTime(p){
   const t=$('#'+p+'Tob'); if(!t) return;
-  const pk=$('#'+p+'TobPick'), u=$('#'+p+'Unk'), note=$('#'+p+'UnkNote');
-  pk.addEventListener('change',()=>{if(pk.value)t.value=pk.value});
-  pk.addEventListener('click',()=>{try{pk.showPicker&&pk.showPicker()}catch(e){}});
-  u.addEventListener('change',()=>{t.disabled=pk.disabled=u.checked;note.hidden=!u.checked;if(u.checked)t.value='12:00'});
+  const btn=$('#'+p+'TobBtn'), u=$('#'+p+'Unk'), note=$('#'+p+'UnkNote');
+  btn.addEventListener('click',()=>{
+    if(openPop&&openPop.parentNode===btn.closest('.f')){closePop();return}
+    let h12=10,mi=0,ap='AM';
+    try{const r=parseTob(t.value);h12=r.h%12||12;mi=r.mi;ap=r.h>=12?'PM':'AM'}catch(e){}
+    const pop=mkPop(btn,'');
+    const col=(title,arr,cur,key)=>`<div class="tcol" data-k="${key}"><b>${title}</b>${arr.map(v=>`<button type="button" data-v="${v}" class="${String(v)===String(cur)?'sel':''}">${typeof v==='number'?String(v).padStart(key==='h'?1:2,'0'):v}</button>`).join('')}</div>`;
+    const draw=()=>{
+      pop.innerHTML=`<div class="tcols">${col('Hour',[1,2,3,4,5,6,7,8,9,10,11,12],h12,'h')}${col('Min',Array.from({length:60},(_,i)=>i),mi,'m')}${col('',['AM','PM'],ap,'a')}</div><button type="button" class="btn done">Done</button>`;
+      pop.querySelectorAll('.tcol').forEach(c=>{
+        const keep=c.scrollTop; c.scrollTop=keep;
+        c.querySelectorAll('button').forEach(b=>b.onclick=()=>{const v=b.dataset.v; if(c.dataset.k==='h')h12=+v; else if(c.dataset.k==='m')mi=+v; else ap=v;
+          t.value=h12+':'+String(mi).padStart(2,'0')+' '+ap;fire(t);const sc=[...pop.querySelectorAll('.tcol')].map(x=>x.scrollTop);draw();pop.querySelectorAll('.tcol').forEach((x,i)=>x.scrollTop=sc[i])})});
+      pop.querySelector('.done').onclick=()=>{if(!t.value){t.value=h12+':'+String(mi).padStart(2,'0')+' '+ap;fire(t)}closePop()};
+    };
+    draw();
+    pop.querySelectorAll('.tcol').forEach(c=>{const s=c.querySelector('.sel');if(s)c.scrollTop=s.offsetTop-c.offsetTop-60});
+  });
+  u.addEventListener('change',()=>{t.disabled=btn.disabled=u.checked;note.hidden=!u.checked;closePop();if(u.checked)t.value='12:00';else if(t.value==='12:00')t.value=''});
+}
+/* searchable dropdown */
+const fold=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+function makeCombo(input,getItems){
+  const box=document.createElement('ul'); box.className='dd'; box.hidden=true; box.setAttribute('role','listbox'); input.parentNode.appendChild(box);
+  let items=[],act=-1,typed=false;
+  const hl=(txt,q)=>{if(!q)return esc(txt);const i=fold(txt).indexOf(q);return i<0?esc(txt):esc(txt.slice(0,i))+'<mark>'+esc(txt.slice(i,i+q.length))+'</mark>'+esc(txt.slice(i+q.length))};
+  function render(){
+    const q=typed?fold(input.value.trim()):''; items=getItems(q,input.value.trim()); act=items.findIndex(x=>!x.info);
+    box.style.top=(input.offsetTop+input.offsetHeight)+'px';
+    box.innerHTML=items.map((x,i)=>`<li role="option" data-i="${i}" class="${x.info?'empty':x.custom?'custom':''} ${i===act?'on':''}">${x.custom||x.info?esc(x.label):hl(x.label,q)}${x.sub?`<small>${esc(x.sub)}</small>`:''}</li>`).join('');
+    box.hidden=!items.length;
+  }
+  function pick(i){const x=items[i]; if(!x||x.info)return; input.value=x.v; box.hidden=true; fire(input)}
+  function move(d){const sel=items.map((x,i)=>x.info?-1:i).filter(i=>i>=0); if(!sel.length)return; let k=sel.indexOf(act); k=(k+d+sel.length)%sel.length; act=sel[k]; box.querySelectorAll('li').forEach((li,i)=>li.classList.toggle('on',i===act)); const el=box.children[act]; if(el)el.scrollIntoView({block:'nearest'})}
+  input.addEventListener('focus',()=>{typed=false;render();setTimeout(()=>input.select(),0)});
+  input.addEventListener('input',()=>{typed=true;render()});
+  input.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'){e.preventDefault();if(box.hidden){typed=false;render()}else move(1)}
+    else if(e.key==='ArrowUp'){e.preventDefault();move(-1)}
+    else if(e.key==='Enter'&&!box.hidden&&act>=0){e.preventDefault();pick(act)}
+    else if(e.key==='Escape'){box.hidden=true}
+  });
+  input.addEventListener('blur',()=>setTimeout(()=>{box.hidden=true},120));
+  box.addEventListener('mousedown',e=>{e.preventDefault();const li=e.target.closest('li');if(li)pick(+li.dataset.i)});
 }
 function wireLocation(p){
   const c=$('#'+p+'Country'); if(!c) return;
-  const city=$('#'+p+'City'), dl=$('#'+p+'Cities'), lat=$('#'+p+'Lat'), lon=$('#'+p+'Lon'), tz=$('#'+p+'Tz'), adv=$('#'+p+'Adv'), note=$('#'+p+'LocNote');
+  const city=$('#'+p+'City'), lat=$('#'+p+'Lat'), lon=$('#'+p+'Lon'), tz=$('#'+p+'Tz'), adv=$('#'+p+'Adv'), note=$('#'+p+'LocNote');
   const st=FIELD_STATE[p]={country:null,city:null};
   function fillCountry(){
     const k=resolveCountry(c.value);
     if(k===st.country) return;
     st.country=k; st.city=null; city.value=''; lat.value=lon.value=''; note.textContent='';
-    dl.innerHTML=k?k.cities.map(x=>`<option value="${esc(x.name)}">`).join(''):'';
-    tz.value=k?k.tz:'';
+        tz.value=k?k.tz:'';
   }
   function fillCity(){
     if(!st.country) return;
@@ -632,6 +722,19 @@ function wireLocation(p){
     else if(v){ if(st.city){lat.value=lon.value=''} st.city=null; adv.open=true; note.className='hint mid'; note.textContent='Not in our list — enter latitude and longitude under Advanced (a quick map search will give them).'}
     else {st.city=null; note.textContent=''}
   }
+  makeCombo(c,(q)=>{
+    let list=COUNTRIES.filter(k=>!q||fold(k.name).includes(q));
+    const al=Object.keys(ALIAS).filter(a=>q&&a.startsWith(q)).map(a=>CMAP.get(ALIAS[a].toLowerCase())).filter(k=>k&&!list.includes(k));
+    list=list.concat(al).sort((x,y)=>(fold(y.name).startsWith(q)-fold(x.name).startsWith(q))||0);
+    list=list.slice(0,80).map(k=>({v:k.name,label:k.name,sub:k.cities.length>1?k.cities.length+' cities':''}));
+    return list.length?list:[{info:1,label:'No country matches “'+c.value.trim()+'”'}];
+  });
+  makeCombo(city,(q,raw)=>{
+    if(!st.country) return [{info:1,label:'Choose a country first'}];
+    let list=st.country.cities.filter(x=>!q||fold(x.name).includes(q)).sort((x,y)=>(fold(y.name).startsWith(q)-fold(x.name).startsWith(q))||0).slice(0,80).map(x=>({v:x.name,label:x.name,sub:x.lat.toFixed(2)+', '+x.lon.toFixed(2)}));
+    if(raw&&!st.country.cities.some(x=>fold(x.name)===fold(raw))) list.push({v:raw,custom:1,label:'Use “'+raw+'” — add coordinates under Advanced'});
+    return list.length?list:[{info:1,label:'No cities listed — type yours and add coordinates under Advanced'}];
+  });
   c.addEventListener('input',fillCountry);
   c.addEventListener('change',()=>{fillCountry();if(st.country)c.value=st.country.name});
   city.addEventListener('input',fillCity); city.addEventListener('change',fillCity);
@@ -914,7 +1017,6 @@ mountBirth('#numFields','n',{time:false,place:false});
 mountBirth('#bFields','b'); mountBirth('#gFields','g');
 mountBirth('#pFields','p',{time:false,place:false}); mountBirth('#qFields','q',{time:false,place:false});
 mountBirth('#lalFields','l');
-$('#countryList')||document.body.insertAdjacentHTML('beforeend',`<datalist id="countryList">${COUNTRIES.map(c=>`<option value="${esc(c.name)}">`).join('')}</datalist>`);
 
 wireForm('#astroForm','#astroErr','#astroResults',()=>astroReport(readBirth('a')));
 wireForm('#numForm','#numErr','#numResults',()=>{
@@ -937,7 +1039,7 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
 
 /* ============ night sky ============ */
 (function(){
-  const cv=$('#sky'), cx=cv.getContext('2d'), still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const cv=$('#sky'), cx=cv.getContext('2d'), calm=matchMedia('(prefers-reduced-motion:reduce)').matches; // calm = no twinkle; planets still drift slowly
   let W,H,stars=[];
   const PLN=[{r:.16,s:.0021,c:'#c9b79a',z:2},{r:.24,s:.0016,c:'#e8d9a8',z:3},{r:.33,s:.0012,c:'#7fb4c9',z:3.4},{r:.43,s:.0009,c:'#d98a6a',z:3},{r:.58,s:.0005,c:'#d4b06a',z:5},{r:.72,s:.0003,c:'#b9a47a',z:4.2}].map(p=>({...p,a:Math.random()*6.28}));
   function size(){const dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);
@@ -945,21 +1047,21 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   function draw(t){
     const g=cx.createRadialGradient(W*.5,H*.35,0,W*.5,H*.35,Math.max(W,H)*.8);g.addColorStop(0,'#0f1938');g.addColorStop(1,'#050813');
     cx.fillStyle=g;cx.fillRect(0,0,W,H);
-    for(const s of stars){cx.globalAlpha=.35+.45*Math.sin(t/1000*s.s+s.p)**2;cx.fillStyle='#dfe8ff';cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.283);cx.fill()}
+    for(const s of stars){cx.globalAlpha=calm?.55:.35+.45*Math.sin(t/1000*s.s+s.p)**2;cx.fillStyle='#dfe8ff';cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.283);cx.fill()}
     cx.globalAlpha=1;
     const ox=W*.5,oy=H*.42,sc=Math.max(W,H)*.62;
     cx.lineWidth=1;
     for(const p of PLN){
       cx.strokeStyle='rgba(160,190,220,.07)';cx.beginPath();cx.ellipse(ox,oy,p.r*sc,p.r*sc*.32,-.18,0,6.283);cx.stroke();
-      const a=p.a+t*p.s*.1, x=ox+Math.cos(a)*p.r*sc, y=oy+Math.sin(a)*p.r*sc*.32;
+      const a=p.a+t*p.s*.1*(calm?.6:1), x=ox+Math.cos(a)*p.r*sc, y=oy+Math.sin(a)*p.r*sc*.32;
       const rot=-.18, rx=ox+(x-ox)*Math.cos(rot)-(y-oy)*Math.sin(rot), ry=oy+(x-ox)*Math.sin(rot)+(y-oy)*Math.cos(rot);
       const gl=cx.createRadialGradient(rx,ry,0,rx,ry,p.z*4);gl.addColorStop(0,p.c+'88');gl.addColorStop(1,'transparent');
       cx.fillStyle=gl;cx.beginPath();cx.arc(rx,ry,p.z*4,0,6.283);cx.fill();
       cx.fillStyle=p.c;cx.globalAlpha=.85;cx.beginPath();cx.arc(rx,ry,p.z,0,6.283);cx.fill();cx.globalAlpha=1;
     }
-    if(!still) requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
   }
-  addEventListener('resize',()=>{size();if(still)draw(0)});size();requestAnimationFrame(draw);
+  addEventListener('resize',size);size();requestAnimationFrame(draw);
 })();
 window.addEventListener('error',e=>console.error('Ankho Ka Math error:',e.message));
 </script>
