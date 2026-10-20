@@ -18,15 +18,29 @@ header.top{position:relative;z-index:2;display:flex;justify-content:space-betwee
 .logo{font:600 26px 'Cormorant Garamond',serif;color:var(--gold);letter-spacing:.02em;text-decoration:none}
 nav a{color:var(--mute);text-decoration:none;margin-left:20px;font-size:14px}
 nav a:hover{color:var(--teal)}
-.hero{text-align:center;padding:72px 0 56px}
-.hero h1{font:600 clamp(48px,11vw,104px)/1 'Cormorant Garamond',serif;margin:0;color:var(--text);letter-spacing:.01em}
-.hero h1 span{color:var(--gold)}
-.hindi{color:var(--teal);letter-spacing:.2em;font-size:14px;margin-top:10px}
-.slogan{font:italic 500 clamp(20px,3.6vw,28px)/1.4 'Cormorant Garamond',serif;color:var(--text);max-width:720px;margin:26px auto 12px}
-.pitch{color:var(--mute);max-width:600px;margin:0 auto 32px;font-size:15px}
-.btn{display:inline-block;background:linear-gradient(135deg,var(--teal),#3aa89c);color:#04201d;border:0;border-radius:999px;padding:15px 34px;font:600 16px Sora,sans-serif;cursor:pointer;text-decoration:none;min-height:48px}
-.btn:hover{filter:brightness(1.1)}
-.btn.ghost{background:transparent;color:var(--teal);border:1px solid var(--teal);padding:10px 20px;font-size:14px;min-height:40px}
+.hero{text-align:center;min-height:calc(100vh - 80px);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 0 64px}
+.eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--teal);opacity:.9;margin-bottom:22px;display:flex;align-items:center;gap:14px}
+.eyebrow:before,.eyebrow:after{content:"";width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--teal))}
+.eyebrow:after{transform:scaleX(-1)}
+.hero h1{font:600 clamp(54px,12vw,120px)/.95 'Cormorant Garamond',serif;margin:0;color:var(--text);letter-spacing:.01em;text-shadow:0 0 60px rgba(95,209,196,.25)}
+.hero h1 span{display:block;background:linear-gradient(100deg,#b8923f,#f1d99a 50%,#c9a45a);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
+.hindi{color:var(--teal);letter-spacing:.35em;font-size:15px;margin-top:18px}
+.orn{display:flex;align-items:center;gap:12px;margin:26px 0 22px;color:var(--gold)}
+.orn i{width:90px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}.orn i:last-child{transform:scaleX(-1)}
+.slogan{font:italic 500 clamp(21px,3.4vw,30px)/1.45 'Cormorant Garamond',serif;color:#dfe6f7;max-width:680px;margin:0 auto 36px}
+.cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--teal),#3aa89c);color:#04201d;border:0;border-radius:999px;padding:16px 38px;font:600 16px Sora,sans-serif;cursor:pointer;text-decoration:none;min-height:48px;box-shadow:0 0 34px rgba(95,209,196,.3);transition:transform .2s,filter .2s}
+.btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--teal);border:1px solid var(--teal);padding:10px 20px;font-size:14px;min-height:40px;box-shadow:none}
+.modes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:44px}
+.modes a{color:var(--mute);text-decoration:none;font-size:13px;border:1px solid var(--line);border-radius:999px;padding:9px 16px;background:rgba(10,16,40,.45);backdrop-filter:blur(6px);transition:.2s}
+.modes a:hover{color:var(--gold);border-color:var(--gold)}
+.hero>*{animation:rise .9s both}.hero>*:nth-child(2){animation-delay:.08s}.hero>*:nth-child(3){animation-delay:.16s}.hero>*:nth-child(4){animation-delay:.24s}.hero>*:nth-child(5){animation-delay:.34s}.hero>*:nth-child(6){animation-delay:.46s}.hero>*:nth-child(7){animation-delay:.58s}
+@media(max-width:560px){.eyebrow{letter-spacing:.2em;font-size:11px}.eyebrow:before,.eyebrow:after{display:none}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.scroll{margin-top:40px;color:var(--mute);font-size:20px;text-decoration:none;animation:bob 2.4s ease-in-out infinite!important}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@media(prefers-reduced-motion:reduce){.hero>*,.scroll{animation:none!important}}
 section.studio{padding:24px 0 60px}
 h2.sec{font:600 38px 'Cormorant Garamond',serif;color:var(--gold);margin:0 0 6px;text-align:center}
 .sub{text-align:center;color:var(--mute);margin:0 0 24px;font-size:14px}
@@ -131,11 +145,14 @@ footer a{color:var(--teal)}
 
 <main class="wrap" id="top">
   <section class="hero">
+    <div class="eyebrow">Vedic astrology · Numerology</div>
     <h1>Ankho Ka <span>Math</span></h1>
     <div class="hindi">अंकों का मैथ</div>
+    <div class="orn" aria-hidden="true"><i></i>✦<i></i></div>
     <p class="slogan">Your story is written in the sky and in your numbers. This is a gentle way to explore your chart and the patterns that shape your life.</p>
-    <p class="pitch">Private Vedic kundli, numerology, match-making and Lal Kitab — calculated in your browser, nothing sent away.</p>
-    <a class="btn" href="#studio" id="beginBtn">Begin a reading</a>
+    <div class="cta"><a class="btn" href="#studio" id="beginBtn">Begin a reading</a></div>
+    <div class="modes"><a href="#studio" data-t="astro">Kundli</a><a href="#studio" data-t="num">Numerology</a><a href="#studio" data-t="matchA">Match</a><a href="#studio" data-t="lal">Lal Kitab</a></div>
+    <a class="scroll" href="#studio" aria-label="Scroll to the reading studio">⌄</a>
   </section>
 
   <section class="studio" id="studio">
@@ -1029,6 +1046,7 @@ wireForm('#matchNForm','#matchNErr','#matchNResults',()=>{
   return matchNReport(a,b)});
 wireForm('#lalForm','#lalErr','#lalResults',()=>lalReport(readBirth('l')));
 
+document.querySelectorAll('.modes a').forEach(a=>a.addEventListener('click',()=>{const t=document.querySelector('.tab[data-t="'+a.dataset.t+'"]');if(t)t.click()}));
 /* tabs */
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===t));
